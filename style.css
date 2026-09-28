@@ -1,0 +1,7098 @@
+/* =========================================================
+   VELAIRE V7
+   ARCHITECTURE WITHOUT BORDERS
+========================================================= */
+
+:root {
+  --black: #10100f;
+  --black-soft: #171715;
+  --ivory: #f2efe8;
+  --stone: #9a968e;
+  --travertine: #d8d0c3;
+  --champagne: #a58d6b;
+  --white: #ffffff;
+
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "DM Sans", Arial, sans-serif;
+
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+body.menu-open,
+body.modal-open {
+  overflow: hidden;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+::selection {
+  background: var(--ivory);
+  color: var(--black);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.section-dark {
+  background: var(--black);
+  color: var(--ivory);
+}
+
+.section-ivory {
+  background: var(--ivory);
+  color: var(--black);
+}
+
+.section-code {
+  position: absolute;
+  top: 40px;
+  right: 4vw;
+  font-size: 10px;
+  letter-spacing: .2em;
+  opacity: .55;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 1s var(--ease),
+    transform 1.2s var(--ease);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--black);
+  display: grid;
+  place-items: center;
+  transition:
+    opacity 1s var(--ease),
+    visibility 1s;
+}
+
+.loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-inner {
+  text-align: center;
+}
+
+.loader-mark {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 25px;
+}
+
+.loader-mark path {
+  fill: none;
+  stroke: var(--ivory);
+  stroke-width: 1;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawLogo 2s var(--ease) forwards;
+}
+
+.loader-mark path:nth-child(2) {
+  animation-delay: .3s;
+}
+
+@keyframes drawLogo {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.loader-wordmark {
+  font-size: 18px;
+  letter-spacing: .35em;
+  margin-left: .35em;
+}
+
+.loader-caption {
+  margin-top: 12px;
+  font-size: 8px;
+  letter-spacing: .25em;
+  opacity: .5;
+}
+
+.loader-progress {
+  margin-top: 35px;
+  font-size: 9px;
+  letter-spacing: .15em;
+}
+
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--ivory);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition:
+    width .35s var(--ease),
+    height .35s var(--ease),
+    background .35s,
+    transform .15s linear;
+  mix-blend-mode: difference;
+}
+
+.cursor span {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--ivory);
+  opacity: .7;
+}
+
+.cursor.active {
+  width: 60px;
+  height: 60px;
+}
+
+.cursor.active span {
+  opacity: 0;
+}
+
+.cursor.image-mode {
+  width: 90px;
+  height: 90px;
+  background: var(--ivory);
+  mix-blend-mode: normal;
+}
+
+.cursor.image-mode span::after {
+  content: "VIEW";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--black);
+  font-size: 8px;
+  letter-spacing: .15em;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header {
+  position: fixed;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 90px;
+  padding: 0 4vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  mix-blend-mode: difference;
+  color: white;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-mark {
+  width: 24px;
+  height: 24px;
+}
+
+.brand-mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+}
+
+.brand-name {
+  font-size: 15px;
+  letter-spacing: .28em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.edition {
+  font-size: 9px;
+  letter-spacing: .15em;
+}
+
+.menu-toggle {
+  width: 42px;
+  height: 42px;
+  position: relative;
+}
+
+.menu-toggle span {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 1px;
+  background: currentColor;
+  transition: transform .5s var(--ease);
+}
+
+.menu-toggle span:first-child {
+  top: 17px;
+}
+
+.menu-toggle span:last-child {
+  top: 25px;
+}
+
+.menu-toggle.active span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.menu-toggle.active span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+
+/* =========================================================
+   FULLSCREEN MENU
+========================================================= */
+
+.fullscreen-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+
+  background: var(--black);
+  color: var(--ivory);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity .7s var(--ease),
+    visibility .7s;
+}
+
+.fullscreen-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-background {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 75% 40%,
+      rgba(216,208,195,.08),
+      transparent 35%
+    );
+}
+
+.menu-top,
+.menu-bottom {
+  position: absolute;
+  left: 4vw;
+  right: 4vw;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 8px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .55;
+}
+
+.menu-top {
+  top: 42px;
+}
+
+.menu-bottom {
+  bottom: 35px;
+}
+
+.menu-content {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  align-items: center;
+  padding: 90px 8vw;
+}
+
+.menu-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.menu-link {
+  display: flex;
+  align-items: baseline;
+  gap: 30px;
+
+  font-family: var(--serif);
+  font-size: clamp(45px, 6vw, 95px);
+  line-height: .9;
+
+  transition: opacity .4s;
+}
+
+.menu-link:hover {
+  opacity: .45;
+}
+
+.menu-number {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: .2em;
+}
+
+.menu-project-preview {
+  height: 60vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-preview-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: .7;
+  transform: scale(1.05);
+  transition:
+    background-image .5s,
+    transform 1s var(--ease);
+}
+
+.menu-project-preview:hover .menu-preview-image {
+  transform: scale(1);
+}
+
+.menu-preview-meta {
+  position: absolute;
+  left: 25px;
+  right: 25px;
+  bottom: 22px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 8px;
+  letter-spacing: .15em;
+}
+
+
+/* =========================================================
+   HERO — V22
+========================================================= */
+
+.hero {
+  height: 100svh;
+  min-height: 720px;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.hero-image-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: scale(1.12);
+  filter: saturate(.78) contrast(1.04);
+  transition:
+    transform 2.4s var(--ease),
+    filter 1.8s ease;
+}
+
+body.loaded .hero-image {
+  transform: scale(1);
+  filter: saturate(.82) contrast(1.04);
+}
+
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,16,15,.34) 0%,
+      rgba(16,16,15,.08) 32%,
+      rgba(16,16,15,.12) 52%,
+      rgba(16,16,15,.86) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(16,16,15,.20) 0%,
+      transparent 35%,
+      transparent 72%,
+      rgba(16,16,15,.22) 100%
+    );
+  pointer-events: none;
+}
+
+.hero-grid-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,.11);
+  z-index: 2;
+  transform-origin: top;
+  opacity: 0;
+  animation: heroLineReveal 1.4s var(--ease) .5s forwards;
+}
+
+.hero-line-left {
+  left: 20%;
+}
+
+.hero-line-right {
+  right: 20%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  padding: 130px 4vw 45px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-top,
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.hero-index,
+.hero-kicker,
+.hero-coordinate,
+.hero-locations {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: .18em;
+  line-height: 1.8;
+}
+
+.hero-index {
+  opacity: .62;
+}
+
+.hero-kicker {
+  text-align: right;
+  opacity: .68;
+}
+
+.hero-title-wrap {
+  margin-left: 8vw;
+  position: relative;
+}
+
+.hero-eyebrow {
+  margin-bottom: 22px;
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: .24em;
+  opacity: .62;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(58px, 10.5vw, 168px);
+  line-height: .79;
+  letter-spacing: -.052em;
+  text-wrap: balance;
+}
+
+.hero-title span {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-title span:nth-child(1) {
+  margin-left: 0;
+}
+
+.hero-title span:nth-child(2) {
+  margin-left: 12vw;
+}
+
+.hero-title span:nth-child(3) {
+  margin-left: 5vw;
+  font-style: italic;
+}
+
+.hero-description {
+  max-width: 300px;
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 10px;
+  line-height: 1.85;
+  letter-spacing: .025em;
+  opacity: .68;
+}
+
+.hero-coordinate {
+  opacity: .58;
+}
+
+.hero-locations {
+  text-align: right;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 17px;
+  align-content: flex-end;
+  opacity: .7;
+}
+
+.hero-locations span {
+  position: relative;
+}
+
+.hero-locations span:not(:last-child)::after {
+  content: "·";
+  position: absolute;
+  right: -11px;
+  opacity: .38;
+}
+
+.scroll-indicator {
+  position: absolute;
+  z-index: 5;
+  left: 4vw;
+  bottom: 38px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  font-family: var(--sans);
+  font-size: 7px;
+  letter-spacing: .24em;
+  opacity: .7;
+}
+
+.scroll-indicator i {
+  width: 50px;
+  height: 1px;
+  background: var(--ivory);
+  transform-origin: left;
+  animation: heroScrollLine 2s var(--ease) 1.2s infinite;
+}
+
+@keyframes heroLineReveal {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes heroScrollLine {
+  0%,
+  100% {
+    transform: scaleX(.35);
+    opacity: .35;
+  }
+
+  50% {
+    transform: scaleX(1);
+    opacity: .8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image,
+  .hero-grid-line,
+  .scroll-indicator i {
+    transition: none;
+    animation: none;
+  }
+
+  .hero-image {
+    transform: scale(1);
+  }
+
+  .hero-grid-line {
+    opacity: 1;
+    transform: none;
+  }
+
+  .scroll-indicator i {
+    transform: none;
+    opacity: .7;
+  }
+}
+
+
+/* =========================================================
+   MANIFESTO — V23
+========================================================= */
+
+.manifesto {
+  min-height: 100vh;
+  position: relative;
+  padding: 15vw 8vw 11vw;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.manifesto::before {
+  content: "";
+  position: absolute;
+  left: 8vw;
+  right: 8vw;
+  top: 0;
+  height: 1px;
+  background: rgba(16,16,15,.12);
+}
+
+.manifesto-inner {
+  width: 100%;
+  max-width: 1320px;
+  position: relative;
+}
+
+.manifesto .eyebrow {
+  display: inline-block;
+  position: relative;
+  padding-left: 32px;
+  font-size: 8px;
+  letter-spacing: .24em;
+  opacity: .55;
+}
+
+.manifesto .eyebrow::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 20px;
+  height: 1px;
+  background: currentColor;
+  opacity: .55;
+}
+
+.manifesto h2 {
+  margin: 55px 0 0;
+  max-width: 1120px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(58px, 8.7vw, 142px);
+  line-height: .86;
+  letter-spacing: -.052em;
+}
+
+.manifesto h2 em {
+  font-style: italic;
+  padding-right: .04em;
+}
+
+.manifesto-footer {
+  margin-top: 11vw;
+  margin-left: auto;
+  width: min(100%, 760px);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  gap: 70px;
+  align-items: end;
+}
+
+.manifesto-footer p {
+  margin: 0;
+  max-width: 390px;
+  font-family: var(--sans);
+  font-size: 11px;
+  line-height: 1.9;
+  letter-spacing: .01em;
+  color: #57534d;
+}
+
+.manifesto-footer span {
+  position: relative;
+  padding-top: 17px;
+  font-family: var(--sans);
+  font-size: 8px;
+  letter-spacing: .22em;
+  line-height: 1.5;
+  opacity: .55;
+}
+
+.manifesto-footer span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(16,16,15,.18);
+}
+
+@media (max-width: 800px) {
+
+  .manifesto {
+    min-height: auto;
+    padding: 30vw 6vw 24vw;
+    align-items: flex-start;
+  }
+
+  .manifesto::before {
+    left: 6vw;
+    right: 6vw;
+  }
+
+  .manifesto .eyebrow {
+    padding-left: 26px;
+    font-size: 7px;
+    letter-spacing: .2em;
+  }
+
+  .manifesto .eyebrow::before {
+    width: 17px;
+  }
+
+  .manifesto h2 {
+    margin-top: 38px;
+    font-size: clamp(48px, 14vw, 82px);
+    line-height: .87;
+    letter-spacing: -.045em;
+  }
+
+  .manifesto-footer {
+    margin-top: 20vw;
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .manifesto-footer p {
+    max-width: 330px;
+    font-size: 10px;
+    line-height: 1.85;
+  }
+
+  .manifesto-footer span {
+    width: fit-content;
+    min-width: 180px;
+    font-size: 7px;
+  }
+
+}
+
+
+/* =========================================================
+   WORKS
+========================================================= */
+
+.works {
+  padding: 10vw 4vw 12vw;
+  position: relative;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12vw;
+}
+
+.section-heading h2,
+.global-header h2,
+.services-header h2,
+.studies-header h2 {
+  margin-top: 25px;
+  font-family: var(--serif);
+  font-size: clamp(50px, 7vw, 110px);
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.04em;
+}
+
+.section-heading em,
+.global-header em,
+.services-header em,
+.studies-header em {
+  font-style: italic;
+}
+
+.project {
+  display: grid;
+  min-height: 700px;
+  margin-bottom: 13vw;
+  position: relative;
+}
+
+.project-image {
+  overflow: hidden;
+  position: relative;
+}
+
+.project-image img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s var(--ease);
+}
+
+.project-image:hover img {
+  transform: scale(1.035);
+}
+
+.project-image-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(16,16,15,.18);
+  opacity: 0;
+
+  transition: opacity .5s var(--ease);
+}
+
+.project-image:hover .project-image-overlay {
+  opacity: 1;
+}
+
+.project-image-overlay span {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ivory);
+
+  display: block;
+
+  font-size: 7px;
+  letter-spacing: .20em;
+  text-align: left;
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: center;
+
+  font-size: 7px;
+  line-height: 1.6;
+  letter-spacing: .16em;
+
+  padding: 10px 18px;
+  gap: 12px;
+}
+
+.project-meta small {
+  font-size: 7px;
+  opacity: .5;
+}
+
+.project-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-location {
+  font-size: 9px;
+  letter-spacing: .2em;
+  margin-bottom: 25px;
+}
+
+.project h3 {
+  font-family: var(--serif);
+  font-size: clamp(55px, 7vw, 105px);
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.045em;
+}
+
+.project p {
+  max-width: 310px;
+  margin-top: 45px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #65615a;
+}
+
+.project-link,
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 35px;
+
+  font-size: 8px;
+  letter-spacing: .18em;
+}
+
+.project-link i,
+.contact-link i {
+  font-style: normal;
+  font-size: 15px;
+  transition: transform .4s var(--ease);
+}
+
+.project-link:hover i,
+.contact-link:hover i {
+  transform: translate(5px, -5px);
+}
+
+/* =========================================================
+   SELECTED WORKS — VELAIRE EDITORIAL GRID
+   LEFT / RIGHT / LEFT / RIGHT LEFT
+   ========================================================= */
+
+/* PROJECT 01 — VILLA NOIR */
+
+.project-one {
+  grid-template-columns: 54% 16% 30%;
+}
+
+.project-one .project-image {
+  grid-column: 1;
+  grid-row: 1;
+  min-height: 720px;
+}
+
+.project-one .project-meta {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.project-one .project-copy {
+  grid-column: 3;
+  grid-row: 1;
+  padding-left: 4vw;
+}
+
+
+/* PROJECT 02 — LAKE RESIDENCE */
+
+.project-two {
+  grid-template-columns: 30% 16% 54%;
+}
+
+.project-two .project-copy {
+  grid-column: 1;
+  grid-row: 1;
+  padding-right: 4vw;
+}
+
+.project-two .project-meta {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.project-two .project-image {
+  grid-column: 3;
+  grid-row: 1;
+  min-height: 760px;
+}
+
+
+/* PROJECT 03 — ALPINE RETREAT */
+
+.project-three {
+  grid-template-columns: 54% 16% 30%;
+}
+
+.project-three .project-image {
+  grid-column: 1;
+  grid-row: 1;
+  min-height: 680px;
+}
+
+.project-three .project-meta {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.project-three .project-copy {
+  grid-column: 3;
+  grid-row: 1;
+  padding-left: 4vw;
+}
+
+
+/* PROJECT 04 — PACIFIC HOUSE */
+
+.project-four {
+  grid-template-columns: 30% 16% 54%;
+}
+
+.project-four .project-copy {
+  grid-column: 1;
+  grid-row: 1;
+  padding-right: 4vw;
+}
+
+.project-four .project-meta {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.project-four .project-image {
+  grid-column: 3;
+  grid-row: 1;
+  min-height: 750px;
+}
+
+/* PROJECT 05 — PALM RESIDENCE */
+
+.project-five {
+  grid-template-columns: 54% 16% 30%;
+}
+
+.project-five .project-image {
+  grid-column: 1;
+  grid-row: 1;
+  min-height: 720px;
+}
+
+.project-five .project-meta {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.project-five .project-copy {
+  grid-column: 3;
+  grid-row: 1;
+  padding-left: 4vw;
+}
+
+/* PROJECT 06 — DESERT HOUSE */
+.project-six {
+  grid-template-columns: 30% 16% 54%;
+}
+.project-six .project-copy {
+  grid-column: 1;
+  grid-row: 1;
+  padding-right: 4vw;
+}
+.project-six .project-meta {
+  grid-column: 2;
+  grid-row: 1;
+}
+.project-six .project-image {
+  grid-column: 3;
+  grid-row: 1;
+  min-height: 760px;
+}
+/* =========================================================
+   TEXT — SAME STANDARD FOR ALL PROJECTS
+   ========================================================= */
+
+.project-copy {
+  align-self: center;
+  justify-content: center;
+  max-width: 430px;
+}
+
+.project-location {
+  margin-bottom: 22px;
+  font-family: var(--sans);
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+  opacity: .48;
+}
+
+.project h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(48px, 5vw, 78px);
+  font-weight: 400;
+  line-height: .88;
+  letter-spacing: -.045em;
+}
+
+.project p {
+  max-width: 350px;
+  margin-top: 30px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.85;
+  letter-spacing: .01em;
+  color: #65615a;
+}
+
+.project-link {
+  margin-top: 30px;
+  font-size: 8px;
+  letter-spacing: .20em;
+}
+
+
+/* =========================================================
+   META — POSIÇÃO LIMPA
+   ========================================================= */
+
+.project-meta small {
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   ESPAÇO ENTRE PROJETOS
+   ========================================================= */
+
+.works-ending {
+  border-top: 1px solid rgba(16,16,15,.2);
+  padding-top: 25px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 8px;
+  letter-spacing: .18em;
+}
+
+
+/* =========================================================
+   PHILOSOPHY
+========================================================= */
+
+.philosophy {
+  min-height: 100vh;
+  position: relative;
+  padding: 12vw 8vw;
+}
+
+.philosophy-inner {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  min-height: 70vh;
+  align-items: center;
+}
+
+.philosophy h2 {
+  margin-top: 35px;
+  font-family: var(--serif);
+  font-size: clamp(65px, 10vw, 150px);
+  line-height: .78;
+  font-weight: 400;
+  letter-spacing: -.05em;
+}
+
+.philosophy h2 em {
+  font-style: italic;
+}
+
+.philosophy-copy {
+  max-width: 430px;
+}
+
+.large-copy {
+  font-family: var(--serif);
+  font-size: 34px;
+  line-height: 1.15;
+  margin-bottom: 50px;
+}
+
+.philosophy-copy p:not(.large-copy) {
+  font-size: 12px;
+  line-height: 1.8;
+  opacity: .65;
+  margin-top: 20px;
+}
+
+
+/* =========================================================
+   STANDARD
+========================================================= */
+
+.standard {
+  position: relative;
+  padding: 12vw 8vw;
+}
+
+.standard-inner {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 8vw;
+}
+
+.standard-intro h2 {
+  margin-top: 35px;
+  font-family: var(--serif);
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 400;
+  line-height: .83;
+  letter-spacing: -.05em;
+}
+
+.standard-intro h2 em {
+  font-style: italic;
+}
+
+.standard-intro > p {
+  max-width: 350px;
+  margin-top: 50px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #65615a;
+}
+
+.standard-list {
+  border-top: 1px solid rgba(16,16,15,.2);
+}
+
+.standard-item {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 30px;
+
+  padding: 35px 0;
+  border-bottom: 1px solid rgba(16,16,15,.2);
+}
+
+.standard-item > span {
+  font-size: 8px;
+  letter-spacing: .15em;
+}
+
+.standard-item h3 {
+  font-size: 10px;
+  letter-spacing: .2em;
+  font-weight: 400;
+}
+
+.standard-item p {
+  max-width: 360px;
+  margin-top: 15px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #6a665f;
+}
+
+
+/* =========================================================
+   STUDIES
+========================================================= */
+
+.studies {
+  position: relative;
+  padding: 12vw 4vw;
+}
+
+.studies-header {
+  margin-bottom: 8vw;
+}
+
+.study-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.study-card {
+  min-height: 470px;
+  border: 1px solid rgba(242,239,232,.18);
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.study-number {
+  font-size: 8px;
+  letter-spacing: .2em;
+  opacity: .55;
+}
+
+.study-svg {
+  width: 100%;
+  max-width: 380px;
+  margin: auto;
+}
+
+.study-svg path,
+.study-svg rect,
+.study-svg circle,
+.study-svg line {
+  fill: none;
+  stroke: var(--ivory);
+  stroke-width: 1;
+}
+
+.study-card > span {
+  font-size: 9px;
+  letter-spacing: .2em;
+}
+
+
+/* =========================================================
+   MATERIALS
+========================================================= */
+
+.materials {
+  position: relative;
+  padding: 12vw 4vw;
+}
+
+.materials-header {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  margin-bottom: 8vw;
+}
+
+.materials-header h2 {
+  margin-top: 30px;
+  font-family: var(--serif);
+  font-size: clamp(55px, 8vw, 120px);
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.05em;
+}
+
+.materials-header h2 em {
+  font-style: italic;
+}
+
+.materials-header > p {
+  align-self: end;
+  max-width: 330px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #68645d;
+}
+
+.materials-interface {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  min-height: 600px;
+}
+
+.material-list {
+  border-top: 1px solid rgba(16,16,15,.2);
+}
+
+.material-button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 20px;
+
+  text-align: left;
+
+  padding: 30px 15px;
+  border-bottom: 1px solid rgba(16,16,15,.2);
+
+  transition: padding .5s var(--ease);
+}
+
+.material-button:hover,
+.material-button.active {
+  padding-left: 30px;
+}
+
+.material-button span {
+  font-size: 8px;
+  letter-spacing: .15em;
+}
+
+.material-button strong {
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.material-button small {
+  font-size: 7px;
+  letter-spacing: .13em;
+  color: #817c73;
+}
+
+.material-preview {
+  position: relative;
+  overflow: hidden;
+  background: #b7b0a3;
+}
+
+.material-texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .7s var(--ease);
+}
+
+.material-texture.active {
+  opacity: 1;
+}
+
+.material-texture.stone {
+  background:
+    linear-gradient(
+      125deg,
+      #d7d0c4 0%,
+      #bcb4a6 30%,
+      #e4ded4 52%,
+      #a69e91 100%
+    );
+}
+
+.material-texture.wood {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #6c5744 0,
+      #8a7057 8px,
+      #5b4938 15px,
+      #987e62 23px
+    );
+}
+
+.material-texture.concrete {
+  background:
+    linear-gradient(
+      135deg,
+      #9b9992,
+      #77766f 45%,
+      #aaa8a1
+    );
+}
+
+.material-texture.glass {
+  background:
+    linear-gradient(
+      130deg,
+      #a7b1b1,
+      #d5d8d4 40%,
+      #6d797a 70%,
+      #bfc8c5
+    );
+}
+
+.material-texture.water {
+  background:
+    linear-gradient(
+      160deg,
+      #6d8888,
+      #a4b9b4 45%,
+      #536d70 70%,
+      #c0cbc3
+    );
+}
+
+.material-preview-info {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 25px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 8px;
+  letter-spacing: .18em;
+  color: var(--black);
+}
+
+
+/* =========================================================
+   ATELIER
+========================================================= */
+
+.atelier {
+  position: relative;
+  min-height: 100vh;
+  padding: 12vw 8vw;
+  display: flex;
+  align-items: center;
+}
+
+.atelier-inner {
+  width: 100%;
+}
+
+.atelier h2 {
+  margin-top: 40px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(60px, 9vw, 135px);
+  line-height: .82;
+  letter-spacing: -.05em;
+}
+
+.atelier h2 em {
+  font-style: italic;
+}
+
+.atelier-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+
+  max-width: 750px;
+  margin: 100px 0 0 auto;
+}
+
+.atelier-bottom p {
+  font-size: 11px;
+  line-height: 1.8;
+  opacity: .65;
+}
+
+.atelier-bottom span {
+  align-self: end;
+  font-size: 8px;
+  letter-spacing: .18em;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.global {
+  position: relative;
+  padding: 12vw 4vw;
+}
+
+.global-header {
+  margin-bottom: 10vw;
+}
+
+.global-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.global-location {
+  padding: 40px 25px;
+  border-top: 1px solid rgba(16,16,15,.2);
+
+  display: grid;
+  grid-template-columns: 50px 1fr auto;
+  align-items: center;
+  gap: 20px;
+
+  transition:
+    background .5s,
+    padding .5s var(--ease);
+}
+
+.global-location:hover {
+  background: rgba(16,16,15,.04);
+  padding-left: 40px;
+}
+
+.global-location span,
+.global-location small {
+  font-size: 8px;
+  letter-spacing: .16em;
+  opacity: .55;
+}
+
+.global-location strong {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services {
+  position: relative;
+  padding: 12vw 8vw;
+}
+
+.services-header {
+  margin-bottom: 10vw;
+}
+
+.services-list {
+  border-top: 1px solid rgba(242,239,232,.2);
+}
+
+.service {
+  display: grid;
+  grid-template-columns: 70px 35% 1fr;
+  gap: 30px;
+  align-items: center;
+
+  padding: 35px 0;
+  border-bottom: 1px solid rgba(242,239,232,.2);
+}
+
+.service > span {
+  font-size: 8px;
+  letter-spacing: .15em;
+  opacity: .55;
+}
+
+.service h3 {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.service p {
+  max-width: 330px;
+  font-size: 11px;
+  line-height: 1.7;
+  opacity: .55;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+  min-height: 90vh;
+  position: relative;
+  padding: 12vw 8vw;
+
+  display: flex;
+  align-items: center;
+}
+
+.contact-inner {
+  width: 100%;
+}
+
+.contact h2 {
+  margin-top: 40px;
+
+  font-family: var(--serif);
+  font-size: clamp(65px, 10vw, 150px);
+  line-height: .8;
+  font-weight: 400;
+  letter-spacing: -.055em;
+}
+
+.contact h2 em {
+  font-style: italic;
+}
+
+.contact-link {
+  margin-top: 90px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+  padding: 55px 4vw 30px;
+}
+
+.footer-top {
+  min-height: 280px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-mark {
+  width: 50px;
+  height: 50px;
+}
+
+.footer-mark path {
+  fill: none;
+  stroke: var(--ivory);
+  stroke-width: 2;
+}
+
+.footer-brand span {
+  font-size: 18px;
+  letter-spacing: .3em;
+}
+
+.footer-tagline {
+  font-family: var(--serif);
+  font-size: 30px;
+  line-height: .95;
+  text-align: right;
+}
+
+.footer-bottom {
+  padding-top: 25px;
+  border-top: 1px solid rgba(242,239,232,.2);
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 7px;
+  letter-spacing: .16em;
+  opacity: .5;
+}
+
+/* =========================================================
+   MAGNETIC
+========================================================= */
+
+.magnetic {
+  transition:
+    transform .45s var(--ease),
+    opacity .3s;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .project-one,
+  .project-two,
+  .project-three,
+  .project-four,
+  .project-five {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-image {
+    grid-column: span 2;
+    min-height: 600px !important;
+  }
+
+  .project-copy {
+    padding: 50px 20px;
+  }
+
+  .project-meta {
+    padding: 50px 20px;
+  }
+
+  .standard-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .standard-list {
+    margin-top: 60px;
+  }
+
+  .modal-main {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .modal-location {
+    display: none;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .cursor {
+    display: none;
+  }
+
+  .site-header {
+    height: 75px;
+    padding: 0 6vw;
+  }
+
+  .brand-name {
+    font-size: 13px;
+  }
+
+  .menu-content {
+    grid-template-columns: 1fr;
+    padding: 100px 8vw;
+  }
+
+  .menu-project-preview {
+    display: none;
+  }
+
+  .menu-link {
+    font-size: clamp(42px, 10vw, 75px);
+  }
+
+  .menu-bottom {
+    display: none;
+  }
+
+  .hero-content {
+    padding: 110px 6vw 35px;
+  }
+
+  .hero-title-wrap {
+    margin-left: 0;
+  }
+
+  .hero-title {
+    font-size: clamp(52px, 13vw, 100px);
+  }
+
+  .hero-title span:nth-child(2),
+  .hero-title span:nth-child(3) {
+    margin-left: 5vw;
+  }
+
+  .hero-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-locations {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .hero-kicker {
+    text-align: left;
+  }
+
+  .manifesto {
+    padding: 25vw 8vw;
+  }
+
+  .manifesto-footer {
+    grid-template-columns: 1fr;
+    margin-top: 70px;
+  }
+
+  .works {
+    padding: 20vw 6vw;
+  }
+
+  .section-heading {
+    margin-bottom: 20vw;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25vw;
+  }
+
+  .project-image {
+    order: 1;
+    min-height: 500px !important;
+  }
+
+  .project-meta {
+    order: 2;
+    padding: 25px 0;
+    gap: 15px;
+    flex-direction: row;
+  }
+
+  .project-copy {
+    order: 3;
+    padding: 20px 0;
+  }
+
+  .project p {
+    margin-top: 30px;
+  }
+
+  .philosophy {
+    padding: 20vw 8vw;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr;
+    gap: 100px;
+  }
+
+  .standard {
+    padding: 20vw 8vw;
+  }
+
+  .studies {
+    padding: 20vw 6vw;
+  }
+
+  .study-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .materials {
+    padding: 20vw 6vw;
+  }
+
+  .materials-header {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .materials-interface {
+    grid-template-columns: 1fr;
+  }
+
+  .material-preview {
+    min-height: 450px;
+  }
+
+  .atelier {
+    padding: 20vw 8vw;
+  }
+
+  .atelier-bottom {
+    grid-template-columns: 1fr;
+    margin-top: 70px;
+  }
+
+  .global {
+    padding: 20vw 6vw;
+  }
+
+  .global-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .global-location {
+    grid-template-columns: 35px 1fr;
+  }
+
+  .global-location small {
+    grid-column: 2;
+  }
+
+  .services {
+    padding: 20vw 8vw;
+  }
+
+  .service {
+    grid-template-columns: 35px 1fr;
+  }
+
+  .service p {
+    grid-column: 2;
+  }
+
+  .contact {
+    padding: 25vw 8vw;
+  }
+
+  .footer-top {
+    min-height: 220px;
+  }
+
+  .footer-tagline {
+    font-size: 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .modal-image-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(16,16,15,.7),
+        rgba(16,16,15,.95)
+      );
+  }
+
+  .project-modal-content {
+    inset: 0;
+    padding: 90px 6vw 30px;
+  }
+
+  .modal-main {
+    display: block;
+  }
+
+  .modal-title-wrap h2 {
+    font-size: clamp(60px, 16vw, 110px);
+  }
+
+  .modal-description {
+    margin-top: 40px;
+    max-width: 450px;
+  }
+
+  .modal-study {
+    margin-top: 40px;
+  }
+
+  .modal-nav-center {
+    display: none;
+  }
+
+  .modal-navigation {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+  .section-code {
+    top: 25px;
+    right: 6vw;
+  }
+
+  .edition {
+    display: none;
+  }
+
+  .hero {
+    min-height: 680px;
+  }
+
+  .hero-grid-line {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: 17vw;
+  }
+
+  .hero-description {
+    max-width: 280px;
+  }
+
+  .hero-coordinate {
+    display: none;
+  }
+
+  .manifesto h2 {
+    font-size: 15vw;
+  }
+
+  .section-heading h2,
+  .global-header h2,
+  .services-header h2,
+  .studies-header h2 {
+    font-size: 14vw;
+  }
+
+  .project h3 {
+    font-size: 17vw;
+  }
+
+  .project-image {
+    min-height: 420px !important;
+  }
+
+  .project-meta {
+    font-size: 7px;
+  }
+
+  .large-copy {
+    font-size: 28px;
+  }
+
+  .standard-intro h2 {
+    font-size: 16vw;
+  }
+
+  .material-button {
+    grid-template-columns: 30px 1fr;
+  }
+
+  .material-button small {
+    display: none;
+  }
+
+  .material-preview {
+    min-height: 350px;
+  }
+
+  .atelier h2 {
+    font-size: 15vw;
+  }
+
+  .global-location strong {
+    font-size: 23px;
+  }
+
+  .service h3 {
+    font-size: 24px;
+  }
+
+  .contact h2 {
+    font-size: 16vw;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 70px;
+  }
+
+  .footer-tagline {
+    text-align: left;
+  }
+
+  .modal-title-wrap h2 {
+    font-size: 17vw;
+  }
+
+  .modal-description p {
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+
+  .hero-image {
+    transform: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+/* =========================================================
+  V8.2 — VELAIRE WORDMARK
+  ========================================================= */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--ivory);
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.brand-mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.brand-type {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-name {
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  line-height: 1;
+}
+
+.brand-tagline {
+  font-family: "DM Sans", sans-serif;
+  font-size: 7px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand-name {
+    font-size: 15px;
+    letter-spacing: 0.22em;
+  }
+
+  .brand-tagline {
+    font-size: 6px;
+    letter-spacing: 0.16em;
+  }
+}
+
+/* =========================================================
+  V9.5 — PROJECT EXPERIENCE
+  FINAL CLEAN SYSTEM
+  ========================================================= */
+
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+
+  display: grid;
+  grid-template-columns: 44% 56%;
+
+  background: var(--black);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity .6s var(--ease),
+    visibility .6s var(--ease);
+}
+
+.project-modal.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.modal-open {
+  overflow: hidden !important;
+}
+
+
+/* =========================================================
+  IMAGE
+  ========================================================= */
+
+.project-modal-image {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #151514;
+}
+
+.project-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
+
+  transition:
+    opacity .45s ease,
+    transform 1.2s var(--ease);
+}
+
+.project-modal.open .project-modal-image img {
+  transform: scale(1.01);
+}
+
+.modal-image-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,.02),
+    rgba(0,0,0,.14)
+  );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+  CONTENT PANEL
+  ========================================================= */
+
+.project-modal-content {
+  position: relative;
+
+  height: 100vh;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 34px 4vw 0;
+
+  background: var(--black);
+  color: var(--ivory);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+  TOP
+  ========================================================= */
+
+.modal-top {
+  position: relative;
+
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  min-height: 52px;
+
+  padding:
+    0
+    65px
+    18px
+    0;
+
+  box-sizing: border-box;
+}
+
+.modal-top > div {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+#modalCode,
+#modalType {
+  display: block;
+
+  font-family: var(--sans);
+  font-size: 7px;
+  line-height: 1.4;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+}
+
+#modalType {
+  opacity: .42;
+}
+
+
+/* =========================================================
+  CLOSE BUTTON
+  ========================================================= */
+
+/*
+  O X fica isolado no canto superior direito.
+  Não participa da barra de navegação.
+*/
+
+.modal-close {
+  position: absolute !important;
+
+  top: 0 !important;
+  right: 0 !important;
+
+  width: 42px !important;
+  height: 42px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(242,239,232,.28) !important;
+  background: var(--black) !important;
+
+  color: var(--ivory);
+
+  cursor: pointer;
+
+  z-index: 100 !important;
+}
+
+.modal-close span {
+  position: absolute !important;
+
+  left: 9px !important;
+  right: 9px !important;
+  top: 20px !important;
+
+  width: auto !important;
+  height: 1px !important;
+
+  margin: 0 !important;
+
+  background: var(--ivory) !important;
+
+  z-index: 101 !important;
+}
+
+.modal-close span:first-child {
+  transform: rotate(45deg);
+}
+
+.modal-close span:last-child {
+  transform: rotate(-45deg);
+}
+
+
+/* =========================================================
+  MAIN
+  ========================================================= */
+
+.modal-main {
+  flex: 0 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(95px, .55fr)
+    minmax(210px, 1.1fr)
+    minmax(170px, .9fr);
+
+  column-gap: 3vw;
+
+  align-items: start;
+
+  padding:
+    2vh
+    0
+    6vh;
+}
+
+
+/* =========================================================
+  LOCATION
+  ========================================================= */
+
+.modal-location {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  padding-top: 6px;
+}
+
+.modal-location span,
+.modal-location strong {
+  font-family: var(--sans);
+
+  font-size: 7px;
+  line-height: 1.5;
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+}
+
+.modal-location span {
+  opacity: .42;
+}
+
+.modal-location strong {
+  font-weight: 400;
+  opacity: .82;
+}
+
+
+/* =========================================================
+  TITLE
+  ========================================================= */
+
+.modal-title-wrap {
+  min-width: 0;
+}
+
+.modal-title-wrap .eyebrow {
+  display: block;
+
+  margin-bottom: 22px;
+
+  font-family: var(--sans);
+
+  font-size: 7px;
+  line-height: 1.4;
+  letter-spacing: .20em;
+
+  text-transform: uppercase;
+
+  opacity: .45;
+}
+
+.modal-title-wrap h2 {
+  margin: 0;
+
+  max-width: 100%;
+
+  font-family: var(--serif);
+
+  font-size: clamp(48px, 5.1vw, 82px);
+
+  font-weight: 400;
+
+  line-height: .84;
+  letter-spacing: -.045em;
+
+  color: var(--ivory);
+}
+
+
+/* =========================================================
+  DESCRIPTION
+  ========================================================= */
+
+.modal-description {
+  min-width: 0;
+
+  align-self: start;
+
+  padding-top: 32px;
+}
+
+.modal-description p {
+  width: 100%;
+  max-width: 340px;
+
+  margin: 0 !important;
+
+  font-family: var(--sans);
+
+  font-size: 10px;
+  font-weight: 300;
+
+  line-height: 1.85;
+  letter-spacing: .01em;
+
+  color: rgba(242,239,232,.62);
+}
+
+
+/* =========================================================
+  LAKE RESIDENCE
+  TITLE ABOVE DESCRIPTION
+  ========================================================= */
+
+.project-modal[data-project="1"] .modal-main {
+  grid-template-columns:
+    minmax(95px, .55fr)
+    minmax(0, 1fr);
+
+  column-gap: 3vw;
+}
+
+.project-modal[data-project="1"] .modal-location {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.project-modal[data-project="1"] .modal-title-wrap {
+  grid-column: 2;
+  grid-row: 1;
+
+  padding: 0;
+}
+
+.project-modal[data-project="1"] .modal-description {
+  grid-column: 2;
+  grid-row: 2;
+
+  padding-top: 28px;
+}
+
+.project-modal[data-project="1"] .modal-title-wrap h2 {
+  margin: 0;
+}
+
+.project-modal[data-project="1"] .modal-description p {
+  margin: 0 !important;
+  max-width: 360px;
+}
+
+
+/* =========================================================
+  MATERIALS
+  ========================================================= */
+
+.modal-materials {
+  margin-top: 34px;
+
+  padding-top: 17px;
+
+  border-top:
+    1px solid rgba(242,239,232,.14);
+}
+
+.modal-materials > span {
+  display: block;
+
+  margin-bottom: 13px;
+
+  font-family: var(--sans);
+
+  font-size: 7px;
+  line-height: 1.4;
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  opacity: .42;
+}
+
+#modalMaterials {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+#modalMaterials i {
+  padding: 7px 9px;
+
+  border:
+    1px solid rgba(242,239,232,.16);
+
+  font-family: var(--sans);
+
+  font-size: 6px;
+  font-style: normal;
+
+  line-height: 1;
+  letter-spacing: .14em;
+
+  color: rgba(242,239,232,.68);
+}
+
+
+/* =========================================================
+  SPATIAL IDEA
+  ========================================================= */
+
+.modal-study {
+  flex: 0 0 auto;
+
+  margin-top: auto;
+
+  padding:
+    25px
+    0
+    24px;
+
+  border-top:
+    1px solid rgba(242,239,232,.14);
+}
+
+.modal-study-heading {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 15px;
+}
+
+.modal-study-heading span {
+  font-family: var(--sans);
+
+  font-size: 7px;
+  line-height: 1.4;
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  opacity: .45;
+}
+
+.modal-study-idea {
+  max-width: 600px;
+
+  margin:
+    0
+    0
+    22px;
+
+  font-family: var(--sans);
+
+  font-size: 10px;
+  font-weight: 300;
+
+  line-height: 1.75;
+  letter-spacing: .01em;
+
+  color: rgba(242,239,232,.58);
+}
+
+.modal-study-line {
+  width: 100%;
+  height: 48px;
+
+  overflow: hidden;
+}
+
+.modal-diagram {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+}
+
+.modal-diagram path,
+.modal-diagram line {
+  fill: none;
+
+  stroke:
+    rgba(242,239,232,.35);
+
+  stroke-width: 1;
+
+  vector-effect: non-scaling-stroke;
+}
+
+
+/* =========================================================
+  NAVIGATION
+  ========================================================= */
+
+.modal-navigation {
+  position: sticky;
+
+  bottom: 0;
+
+  z-index: 20;
+
+  flex: 0 0 66px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-top: 0;
+
+  background: var(--black);
+
+  border-top:
+    1px solid rgba(242,239,232,.14);
+}
+
+.modal-nav {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0;
+
+  border: 0;
+  background: none;
+
+  color: var(--ivory);
+
+  font-family: var(--sans);
+
+  font-size: 7px;
+  line-height: 1;
+  letter-spacing: .18em;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+.modal-nav.previous {
+  justify-self: start;
+}
+
+.modal-nav.next {
+  justify-self: end;
+}
+
+.modal-nav span {
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.modal-nav-center {
+  justify-self: center;
+
+  font-family: var(--sans);
+
+  font-size: 6px;
+  line-height: 1;
+  letter-spacing: .18em;
+
+  opacity: .25;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+  TABLET
+  ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .project-modal {
+    grid-template-columns: 40% 60%;
+  }
+
+  .project-modal-content {
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }
+
+  .modal-main {
+    grid-template-columns:
+      125px
+      minmax(0, 1fr);
+
+    row-gap: 28px;
+  }
+
+  .modal-location {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .modal-title-wrap {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .modal-description {
+    grid-column: 2;
+    grid-row: 2;
+
+    padding-top: 0;
+  }
+
+  /*
+    Lake no tablet:
+    título e descrição continuam empilhados.
+  */
+
+  .project-modal[data-project="1"] .modal-main {
+    grid-template-columns:
+      125px
+      minmax(0, 1fr);
+
+    row-gap: 24px;
+  }
+
+  .project-modal[data-project="1"] .modal-location {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .project-modal[data-project="1"] .modal-title-wrap {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .project-modal[data-project="1"] .modal-description {
+    grid-column: 2;
+    grid-row: 2;
+
+    padding-top: 0;
+  }
+
+  .modal-title-wrap h2 {
+    font-size:
+      clamp(45px, 6vw, 70px);
+  }
+
+  .modal-study {
+    margin-top: 20px;
+  }
+}
+
+
+/* =========================================================
+  MOBILE
+  ========================================================= */
+
+@media (max-width: 800px) {
+
+  .project-modal {
+    display: block;
+
+    overflow-y: auto;
+  }
+
+  .project-modal-image {
+    height: 48vh;
+
+    min-height: 360px;
+  }
+
+  .project-modal-content {
+    height: auto;
+
+    min-height: 52vh;
+
+    overflow: visible;
+
+    padding:
+      28px
+      6vw
+      0;
+  }
+
+  .modal-top {
+    min-height: 48px;
+
+    padding:
+      0
+      55px
+      15px
+      0;
+  }
+
+  .modal-close {
+    width: 38px !important;
+    height: 38px !important;
+
+    top: 0 !important;
+    right: 0 !important;
+  }
+
+  .modal-close span {
+    top: 18px !important;
+  }
+
+  .modal-main {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+
+    padding:
+      0
+      0
+      40px;
+  }
+
+  .modal-location {
+    margin-bottom: 28px;
+
+    padding: 0;
+  }
+
+  .modal-title-wrap {
+    margin-bottom: 32px;
+  }
+
+  .modal-title-wrap .eyebrow {
+    margin-bottom: 17px;
+  }
+
+  .modal-title-wrap h2 {
+    font-size:
+      clamp(50px, 15vw, 82px);
+
+    line-height: .84;
+  }
+
+  .modal-description {
+    padding: 0;
+  }
+
+  .modal-description p {
+    max-width: none;
+
+    font-size: 10px;
+
+    line-height: 1.85;
+  }
+
+  /*
+    Lake mobile volta para o fluxo normal,
+    sem sobreposição.
+  */
+
+  .project-modal[data-project="1"] .modal-location,
+  .project-modal[data-project="1"] .modal-title-wrap,
+  .project-modal[data-project="1"] .modal-description {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .project-modal[data-project="1"] .modal-description {
+    padding-top: 0;
+  }
+
+  .modal-materials {
+    margin-top: 28px;
+  }
+
+  .modal-study {
+    margin-top: 0;
+
+    padding:
+      25px
+      0;
+  }
+
+  .modal-study-idea {
+    font-size: 10px;
+    line-height: 1.75;
+  }
+
+  .modal-navigation {
+    position: sticky;
+
+    bottom: 0;
+
+    margin:
+      0
+      -6vw;
+
+    padding:
+      0
+      6vw;
+
+    min-height: 64px;
+
+    grid-template-columns:
+      1fr
+      1fr;
+  }
+
+  .modal-nav.previous {
+    justify-self: start;
+  }
+
+  .modal-nav.next {
+    justify-self: end;
+  }
+
+  .modal-nav-center {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+  SMALL MOBILE
+  ========================================================= */
+
+@media (max-width: 520px) {
+
+  .project-modal-image {
+    height: 43vh;
+
+    min-height: 310px;
+  }
+
+  .project-modal-content {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .modal-title-wrap h2 {
+    font-size: 17vw;
+  }
+
+  .modal-description p,
+  .modal-study-idea {
+    font-size: 9.5px;
+  }
+
+  .modal-navigation {
+    margin-left: -5vw;
+    margin-right: -5vw;
+
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .modal-nav {
+    font-size: 6.5px;
+  }
+}
+/* =========================================================
+   LAKE RESIDENCE — MODAL TEXT ALIGNMENT
+   ========================================================= */
+
+.project-modal[data-project="1"] .modal-main {
+  align-items: start !important;
+}
+
+.project-modal[data-project="1"] .modal-title-wrap {
+  align-self: start !important;
+  padding-top: 0 !important;
+}
+
+.project-modal[data-project="1"] .modal-title-wrap h2 {
+  margin-top: 25px !important;
+  margin-bottom: 0 !important;
+}
+
+.project-modal[data-project="1"] .modal-description {
+  align-self: start !important;
+  padding-top: 25px !important;
+  margin-top: 0 !important;
+  min-width: 0 !important;
+}
+
+.project-modal[data-project="1"] .modal-description p {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.85 !important;
+}
+
+.project-modal[data-project="1"] .modal-materials {
+  margin-top: 32px !important;
+}
+
+/* =========================================================
+   V10 — VELAIRE PROJECT EXPERIENCE
+   MOTION & TRANSITIONS
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   01 — MODAL ENTRANCE
+   --------------------------------------------------------- */
+
+.project-modal .project-modal-image img {
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity .9s ease,
+    transform 1.8s var(--ease);
+}
+
+.project-modal.open .project-modal-image img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* ---------------------------------------------------------
+   02 — CONTENT REVEAL
+   --------------------------------------------------------- */
+
+.project-modal .modal-top > div,
+.project-modal .modal-location,
+.project-modal .modal-title-wrap,
+.project-modal .modal-description,
+.project-modal .modal-study,
+.project-modal .modal-navigation {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity .75s var(--ease),
+    transform .9s var(--ease);
+}
+
+
+/* Top information */
+
+.project-modal.open .modal-top > div {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .15s;
+}
+
+
+/* Location */
+
+.project-modal.open .modal-location {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .25s;
+}
+
+
+/* Title */
+
+.project-modal.open .modal-title-wrap {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .34s;
+}
+
+
+/* Description */
+
+.project-modal.open .modal-description {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .47s;
+}
+
+
+/* Spatial study */
+
+.project-modal.open .modal-study {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .58s;
+}
+
+
+/* Navigation */
+
+.project-modal.open .modal-navigation {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .68s;
+}
+
+
+/* ---------------------------------------------------------
+   03 — TITLE REVEAL
+   --------------------------------------------------------- */
+
+.project-modal .modal-title-wrap h2 {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(8px);
+
+  transition:
+    clip-path 1s var(--ease),
+    transform 1s var(--ease);
+}
+
+.project-modal.open .modal-title-wrap h2 {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+
+  transition-delay: .38s;
+}
+
+
+/* ---------------------------------------------------------
+   04 — EYEBROW
+   --------------------------------------------------------- */
+
+.project-modal .modal-title-wrap .eyebrow {
+  opacity: 0;
+  transform: translateY(8px);
+
+  transition:
+    opacity .6s var(--ease),
+    transform .7s var(--ease);
+}
+
+.project-modal.open .modal-title-wrap .eyebrow {
+  opacity: .45;
+  transform: translateY(0);
+
+  transition-delay: .30s;
+}
+
+
+/* ---------------------------------------------------------
+   05 — MATERIAL TAGS
+   --------------------------------------------------------- */
+
+.project-modal #modalMaterials i {
+  opacity: 0;
+  transform: translateY(12px);
+
+  transition:
+    opacity .5s var(--ease),
+    transform .6s var(--ease);
+}
+
+.project-modal.open #modalMaterials i {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------
+   06 — SPATIAL DIAGRAM
+   --------------------------------------------------------- */
+
+.project-modal .modal-diagram path,
+.project-modal .modal-diagram line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.project-modal.open .modal-diagram path,
+.project-modal.open .modal-diagram line {
+  animation:
+    velaireDrawDiagram 1.8s var(--ease) forwards;
+  animation-delay: .65s;
+}
+
+@keyframes velaireDrawDiagram {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   07 — NAVIGATION MICRO INTERACTION
+   --------------------------------------------------------- */
+
+.project-modal .modal-nav {
+  transition:
+    opacity .35s ease,
+    transform .5s var(--ease),
+    letter-spacing .45s var(--ease);
+}
+
+.project-modal .modal-nav:hover {
+  transform: translateX(4px);
+}
+
+.project-modal .modal-nav.previous:hover {
+  transform: translateX(-4px);
+}
+
+.project-modal .modal-nav span {
+  transition:
+    transform .45s var(--ease);
+}
+
+.project-modal .modal-nav.next:hover span {
+  transform: translateX(5px);
+}
+
+.project-modal .modal-nav.previous:hover span {
+  transform: translateX(-5px);
+}
+
+
+/* ---------------------------------------------------------
+   08 — MATERIAL HOVER
+   --------------------------------------------------------- */
+
+.project-modal #modalMaterials i:hover {
+  border-color: rgba(242,239,232,.55);
+}
+
+
+/* ---------------------------------------------------------
+   09 — MODAL BACKGROUND TRANSITION
+   --------------------------------------------------------- */
+
+.project-modal {
+  transition:
+    opacity .7s var(--ease),
+    visibility .7s;
+}
+
+.project-modal-content {
+  transition:
+    transform 1s var(--ease);
+}
+
+.project-modal:not(.open) .project-modal-content {
+  transform: translateX(18px);
+}
+
+.project-modal.open .project-modal-content {
+  transform: translateX(0);
+}
+
+
+/* ---------------------------------------------------------
+   10 — REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .project-modal .project-modal-image img,
+  .project-modal .modal-top > div,
+  .project-modal .modal-location,
+  .project-modal .modal-title-wrap,
+  .project-modal .modal-description,
+  .project-modal .modal-study,
+  .project-modal .modal-navigation,
+  .project-modal .modal-title-wrap h2,
+  .project-modal .modal-title-wrap .eyebrow,
+  .project-modal #modalMaterials i,
+  .project-modal .project-modal-content {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .project-modal .modal-diagram path,
+  .project-modal .modal-diagram line {
+    stroke-dashoffset: 0 !important;
+  }
+
+}
+/* =========================================================
+   V10 — PROJECT CHANGE REFRESH
+   ========================================================= */
+
+.project-modal.motion-refresh .project-modal-image img {
+  opacity: 0;
+  transform: scale(1.08);
+}
+
+.project-modal.motion-refresh .modal-top > div,
+.project-modal.motion-refresh .modal-location,
+.project-modal.motion-refresh .modal-title-wrap,
+.project-modal.motion-refresh .modal-description,
+.project-modal.motion-refresh .modal-study,
+.project-modal.motion-refresh .modal-navigation {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.project-modal.motion-refresh .modal-title-wrap h2 {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(8px);
+}
+
+.project-modal.motion-refresh .modal-title-wrap .eyebrow {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.project-modal.motion-refresh #modalMaterials i {
+  opacity: 0;
+  transform: translateY(12px);
+}
+/* =========================================================
+   ALPINE RETREAT
+   ========================================================= */
+
+.project-modal[data-project="2"] .modal-main {
+  grid-template-columns:
+    minmax(95px, .55fr)
+    minmax(0, 1fr);
+
+  column-gap: 3vw;
+}
+
+.project-modal[data-project="2"] .modal-location {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.project-modal[data-project="2"] .modal-title-wrap {
+  grid-column: 2;
+  grid-row: 1;
+
+  padding: 0;
+}
+
+.project-modal[data-project="2"] .modal-description {
+  grid-column: 2;
+  grid-row: 2;
+
+  padding-top: 28px;
+}
+
+.project-modal[data-project="2"] .modal-title-wrap h2 {
+  margin: 0;
+}
+
+.project-modal[data-project="2"] .modal-description p {
+  margin: 0 !important;
+  max-width: 360px;
+}
+
+/* ====================================
+   PROJECT 05 — PALM RESIDENCE MODAL
+   ==================================== */
+/*  */
+
+.project-modal[data-project="4"] .modal-main {
+  grid-template-columns:
+    minmax(95px, .55fr)
+    minmax(0, 1fr);
+  column-gap: 3vw;
+  align-items: start !important;
+}
+
+.project-modal[data-project="4"] .modal-location {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.project-modal[data-project="4"] .modal-title-wrap {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start !important;
+  padding: 0 !important;
+}
+
+.project-modal[data-project="4"] .modal-title-wrap h2 {
+  margin-top: 25px !important;
+  margin-bottom: 0 !important;
+}
+
+.project-modal[data-project="4"] .modal-description {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start !important;
+  padding-top: 25px !important;
+  margin-top: 0 !important;
+  min-width: 0 !important;
+}
+
+.project-modal[data-project="4"] .modal-description p {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 360px;
+  line-height: 1.85 !important;
+}
+
+.project-modal[data-project="4"] .modal-materials {
+  margin-top: 32px !important;
+}
+
+/* =========================================================
+   V11 — PREMIUM MICROINTERACTIONS
+   ========================================================= */
+
+/* ---------- PREMIUM CURSOR ---------- */
+
+.cursor {
+  transition:
+    width .45s var(--ease),
+    height .45s var(--ease),
+    transform .45s var(--ease),
+    opacity .3s ease;
+}
+
+.cursor.active {
+  width: 54px;
+  height: 54px;
+}
+
+.cursor.active::after {
+  content: "VIEW";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+
+  font-family: var(--sans);
+  font-size: 7px;
+  letter-spacing: .18em;
+
+  color: var(--ivory);
+}
+
+
+/* ---------- PROJECT HOVER ---------- */
+
+.project-image {
+  overflow: hidden;
+}
+
+.project-image img {
+  transition:
+    transform 1.2s var(--ease),
+    filter 1.2s ease;
+}
+
+.project:hover .project-image::after {
+  opacity: 1;
+}
+
+.project-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    transparent 55%,
+    rgba(16,16,15,.28) 100%
+  );
+
+  opacity: 0;
+
+  transition: opacity .8s ease;
+
+  pointer-events: none;
+}
+
+
+/* ---------- PROJECT INDEX ---------- */
+
+.project-meta span:first-child {
+  transition:
+    opacity .4s ease,
+    letter-spacing .5s var(--ease);
+}
+
+.project:hover .project-meta span:first-child {
+  letter-spacing: .24em;
+}
+
+
+/* ---------- TEXT LINK ---------- */
+
+.text-link {
+  transition:
+    letter-spacing .45s var(--ease),
+    opacity .35s ease;
+}
+
+.text-link:hover {
+  letter-spacing: .16em;
+}
+
+
+/* ---------- MAGNETIC BUTTON FEEL ---------- */
+
+.magnetic {
+  transition:
+    transform .5s var(--ease),
+    opacity .35s ease;
+}
+
+
+/* ---------- MODAL NAVIGATION ---------- */
+
+.modal-nav {
+  transition:
+    opacity .35s ease,
+    transform .5s var(--ease),
+    letter-spacing .45s var(--ease);
+}
+
+.modal-nav:hover {
+  letter-spacing: .18em;
+}
+
+
+/* ---------- CLOSE BUTTON ---------- */
+
+.modal-close {
+  transition:
+    transform .6s var(--ease),
+    border-color .35s ease;
+}
+
+.modal-close:hover {
+  transform: rotate(90deg);
+}
+
+
+/* ---------- MATERIAL TAGS ---------- */
+
+#modalMaterials i {
+  transition:
+    opacity .5s var(--ease),
+    transform .5s var(--ease),
+    border-color .4s ease,
+    background-color .4s ease,
+    color .4s ease;
+}
+
+#modalMaterials i:hover {
+  transform: translateY(-2px);
+  border-color: rgba(242,239,232,.45);
+  background: rgba(242,239,232,.04);
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .cursor {
+    display: none;
+  }
+
+  .project:hover .project-image img {
+    transform: none;
+  }
+
+  .project-image::after {
+    display: none;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cursor,
+  .project-image img,
+  .project-image::after,
+  .project-meta span:first-child,
+  .text-link,
+  .magnetic,
+  .modal-nav,
+  .modal-close,
+  #modalMaterials i {
+    transition: none !important;
+  }
+
+}
+/* =========================================================
+   V11.2 — PROJECT TRANSITION
+   ========================================================= */
+
+.project-modal.motion-refresh .project-modal-image {
+  overflow: hidden;
+}
+
+.project-modal.motion-refresh .project-modal-image img {
+  opacity: 0 !important;
+  transform: scale(1.06) !important;
+  filter: blur(2px);
+}
+
+.project-modal.open .project-modal-image img {
+  filter: blur(0);
+  transition:
+    opacity .7s ease,
+    transform 1.4s var(--ease),
+    filter 1.1s ease;
+}
+/* =========================================================
+   V11.3 — EDITORIAL REVEAL
+   ========================================================= */
+
+.project-modal .modal-location strong,
+.project-modal .modal-description p,
+.project-modal .modal-materials > span {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity .7s var(--ease),
+    transform .8s var(--ease);
+}
+
+.project-modal.open .modal-location strong {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .38s;
+}
+
+.project-modal.open .modal-description p {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .52s;
+}
+
+.project-modal.open .modal-materials > span {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: .62s;
+}
+
+
+/* ---------- MATERIAL TAG CASCADE ---------- */
+
+.project-modal.open #modalMaterials i:nth-child(1) {
+  transition-delay: .58s;
+}
+
+.project-modal.open #modalMaterials i:nth-child(2) {
+  transition-delay: .68s;
+}
+
+.project-modal.open #modalMaterials i:nth-child(3) {
+  transition-delay: .78s;
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .project-modal .modal-location strong,
+  .project-modal .modal-description p,
+  .project-modal .modal-materials > span {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+}
+/* =========================================================
+   V11.4 — PROJECT IMAGE PARALLAX
+   ========================================================= */
+
+.project-image img {
+  will-change: transform;
+}
+
+.project-image {
+  --parallax-x: 0px;
+  --parallax-y: 0px;
+}
+
+.project:hover .project-image img {
+  transform:
+    translate3d(var(--parallax-x), var(--parallax-y), 0)
+    scale(1.035);
+}
+
+@media (max-width: 800px) {
+
+  .project-image {
+    --parallax-x: 0px;
+    --parallax-y: 0px;
+  }
+
+  .project:hover .project-image img {
+    transform: none;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .project-image img {
+    will-change: auto;
+  }
+
+}
+/* =========================================================
+   V11.5 — FULLSCREEN MENU EDITORIAL
+   ========================================================= */
+
+.menu-overlay {
+  overflow: hidden;
+}
+
+/* menu background */
+
+.menu-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--black);
+  transform: translateY(100%);
+  transition: transform 1s var(--ease);
+}
+
+.menu-overlay.open::before {
+  transform: translateY(0);
+}
+
+
+/* menu links */
+
+.menu-overlay .menu-link {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity .7s var(--ease),
+    transform .9s var(--ease),
+    letter-spacing .5s var(--ease);
+}
+
+.menu-overlay.open .menu-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-overlay.open .menu-link:nth-child(1) {
+  transition-delay: .18s;
+}
+
+.menu-overlay.open .menu-link:nth-child(2) {
+  transition-delay: .25s;
+}
+
+.menu-overlay.open .menu-link:nth-child(3) {
+  transition-delay: .32s;
+}
+
+.menu-overlay.open .menu-link:nth-child(4) {
+  transition-delay: .39s;
+}
+
+.menu-overlay.open .menu-link:nth-child(5) {
+  transition-delay: .46s;
+}
+
+
+/* elegant hover */
+
+.menu-overlay .menu-link:hover {
+  letter-spacing: .045em;
+}
+
+
+/* project preview */
+
+.menu-overlay .menu-preview {
+  opacity: 0;
+  transform: translateX(30px);
+  transition:
+    opacity .8s var(--ease),
+    transform 1s var(--ease);
+}
+
+.menu-overlay.open .menu-preview {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: .52s;
+}
+
+
+/* preview image */
+
+.menu-overlay .menu-preview img {
+  transform: scale(1.06);
+  transition:
+    transform 1.4s var(--ease);
+}
+
+.menu-overlay.open .menu-preview img {
+  transform: scale(1);
+}
+
+
+/* menu close */
+
+.menu-overlay .menu-close {
+  opacity: 0;
+  transform: rotate(-45deg);
+  transition:
+    opacity .5s ease,
+    transform .7s var(--ease);
+}
+
+.menu-overlay.open .menu-close {
+  opacity: 1;
+  transform: rotate(0);
+  transition-delay: .15s;
+}
+
+
+/* subtle line */
+
+.menu-overlay .menu-line {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s var(--ease);
+}
+
+.menu-overlay.open .menu-line {
+  transform: scaleX(1);
+  transition-delay: .55s;
+}
+
+
+/* mobile */
+
+@media (max-width: 800px) {
+
+  .menu-overlay .menu-preview {
+    display: none;
+  }
+
+  .menu-overlay .menu-link {
+    transform: translateY(22px);
+  }
+
+}
+
+
+/* reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .menu-overlay::before,
+  .menu-overlay .menu-link,
+  .menu-overlay .menu-preview,
+  .menu-overlay .menu-preview img,
+  .menu-overlay .menu-close,
+  .menu-overlay .menu-line {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .menu-overlay.open .menu-link,
+  .menu-overlay.open .menu-preview,
+  .menu-overlay.open .menu-close {
+    opacity: 1 !important;
+  }
+
+}
+/* =========================================================
+   V11.6 — VELAIRE HEADER REFINEMENT
+   ========================================================= */
+
+header {
+  transition:
+    padding .7s var(--ease),
+    background-color .7s ease;
+}
+
+
+/* ---------- MONOGRAM ---------- */
+
+.brand-mark {
+  transition:
+    transform .7s var(--ease);
+}
+
+.brand:hover .brand-mark {
+  transform: rotate(90deg);
+}
+
+.brand-mark path {
+  transition:
+    stroke-width .4s ease,
+    opacity .4s ease;
+}
+
+.brand:hover .brand-mark path {
+  stroke-width: 2.6;
+}
+
+
+/* ---------- WORDMARK ---------- */
+
+.brand-name {
+  transition:
+    letter-spacing .6s var(--ease),
+    opacity .4s ease;
+}
+
+.brand:hover .brand-name {
+  letter-spacing: .34em;
+}
+
+
+/* ---------- TAGLINE ---------- */
+
+.brand-tagline {
+  transition:
+    opacity .5s ease,
+    letter-spacing .6s var(--ease);
+}
+
+.brand:hover .brand-tagline {
+  opacity: .75;
+  letter-spacing: .27em;
+}
+
+
+/* ---------- EDITION ---------- */
+
+.edition {
+  transition:
+    opacity .4s ease,
+    letter-spacing .5s var(--ease);
+}
+
+.edition:hover {
+  opacity: 1;
+  letter-spacing: .24em;
+}
+
+
+/* ---------- MENU BUTTON ---------- */
+
+.menu-toggle {
+  transition:
+    opacity .35s ease,
+    letter-spacing .5s var(--ease);
+}
+
+.menu-toggle:hover {
+  letter-spacing: .25em;
+}
+
+
+/* ---------- MENU LINES ---------- */
+
+.menu-toggle span {
+  transition:
+    transform .55s var(--ease),
+    width .5s var(--ease);
+}
+
+.menu-toggle:hover span:first-child {
+  width: 100%;
+}
+
+.menu-toggle:hover span:last-child {
+  width: 65%;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .brand:hover .brand-mark {
+    transform: none;
+  }
+
+  .brand:hover .brand-name {
+    letter-spacing: .22em;
+  }
+
+  .brand:hover .brand-tagline {
+    letter-spacing: .16em;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  header,
+  .brand-mark,
+  .brand-mark path,
+  .brand-name,
+  .brand-tagline,
+  .edition,
+  .menu-toggle,
+  .menu-toggle span {
+    transition: none !important;
+  }
+
+}
+/* =========================================================
+   V11.7 — SCROLL EXPERIENCE
+   ========================================================= */
+
+/* ---------- SECTION TRANSITIONS ---------- */
+
+section {
+  position: relative;
+}
+
+
+/* ---------- EDITORIAL REVEAL ---------- */
+
+section:not(.hero) {
+  isolation: isolate;
+}
+
+section:not(.hero)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+
+  background: rgba(242,239,232,.10);
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  transition: transform 1.4s var(--ease);
+}
+
+
+/* ---------- WORKS ---------- */
+
+.project {
+  transition:
+    opacity .7s ease;
+}
+
+.project-image {
+  transform: translateZ(0);
+}
+
+
+/* ---------- EDITORIAL NUMBERS ---------- */
+
+.project-meta {
+  transition:
+    opacity .5s ease,
+    letter-spacing .5s var(--ease);
+}
+
+
+/* ---------- PHILOSOPHY ---------- */
+
+.philosophy,
+.manifesto,
+.standard {
+  position: relative;
+}
+
+
+/* ---------- VERTICAL SIGNATURE LINE ---------- */
+
+.philosophy::before,
+.manifesto::before,
+.standard::before {
+  content: "";
+  position: absolute;
+  left: 4vw;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+
+  background: rgba(242,239,232,.10);
+
+  transform: scaleY(.35);
+  transform-origin: top;
+
+  transition: transform 1.5s var(--ease);
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .philosophy::before,
+  .manifesto::before,
+  .standard::before {
+    left: 6vw;
+    opacity: .6;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  section:not(.hero)::after,
+  .philosophy::before,
+  .manifesto::before,
+  .standard::before {
+    transition: none !important;
+    transform: none !important;
+  }
+
+}
+/* =========================================================
+   V12 — PROJECT EXPERIENCE
+   ========================================================= */
+
+/* ---------- MODAL ATMOSPHERE ---------- */
+
+.project-modal {
+  background: var(--black);
+}
+
+.project-modal-image {
+  position: relative;
+  isolation: isolate;
+}
+
+.project-modal-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 45%,
+      rgba(16,16,15,.18) 72%,
+      rgba(16,16,15,.72) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ---------- IMAGE DEPTH ---------- */
+
+.project-modal-image img {
+  will-change: transform, opacity;
+}
+
+/* ---------- PROJECT CODE ---------- */
+
+#modalCode,
+#modalType {
+  transition:
+    opacity .5s ease,
+    letter-spacing .5s var(--ease);
+}
+
+#modalCode {
+  letter-spacing: .22em;
+}
+
+#modalType {
+  letter-spacing: .20em;
+}
+
+
+/* ---------- LOCATION ---------- */
+
+.modal-location strong {
+  transition:
+    letter-spacing .6s var(--ease);
+}
+
+.modal-location strong:hover {
+  letter-spacing: .08em;
+}
+
+
+/* ---------- DESCRIPTION ---------- */
+
+.modal-description p {
+  text-wrap: balance;
+}
+
+
+/* ---------- MATERIAL PALETTE ---------- */
+
+.modal-materials {
+  position: relative;
+}
+
+.modal-materials::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 34px;
+  height: 1px;
+
+  background: rgba(242,239,232,.45);
+
+  transform-origin: left;
+  transition: width .7s var(--ease);
+}
+
+.modal-materials:hover::before {
+  width: 70px;
+}
+
+
+/* ---------- SPATIAL IDEA ---------- */
+
+.modal-study {
+  position: relative;
+}
+
+.modal-study::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 34px;
+
+  background: rgba(242,239,232,.32);
+
+  transition: height .8s var(--ease);
+}
+
+.modal-study:hover::before {
+  height: 60px;
+}
+
+.modal-study-idea {
+  max-width: 520px;
+}
+
+
+/* ---------- DIAGRAM ---------- */
+
+.modal-diagram {
+  opacity: .7;
+  transition: opacity .6s ease;
+}
+
+.modal-study:hover .modal-diagram {
+  opacity: 1;
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+.modal-navigation {
+  border-top: 1px solid rgba(242,239,232,.10);
+}
+
+.modal-nav-center {
+  opacity: .35;
+  letter-spacing: .18em;
+  transition: opacity .4s ease;
+}
+
+.modal-navigation:hover .modal-nav-center {
+  opacity: .55;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .project-modal-image::after {
+    background:
+      linear-gradient(
+        180deg,
+        transparent 50%,
+        rgba(16,16,15,.45) 100%
+      );
+  }
+
+  .modal-study::before {
+    display: none;
+  }
+
+  .modal-materials:hover::before {
+    width: 34px;
+  }
+
+}
+/* =========================================================
+   V12 — PROJECT PROGRESS
+   ========================================================= */
+
+.modal-progress {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: auto;
+  padding-top: 22px;
+
+  font-family: var(--sans);
+  font-size: 7px;
+  letter-spacing: .18em;
+  opacity: .55;
+}
+
+.modal-progress-line {
+  position: relative;
+  height: 1px;
+  background: rgba(242,239,232,.15);
+  overflow: hidden;
+}
+
+.modal-progress-line span {
+  display: block;
+  width: 25%;
+  height: 100%;
+  background: rgba(242,239,232,.7);
+
+  transform-origin: left;
+
+  transition:
+    width .8s var(--ease);
+}
+
+.modal-progress-current,
+.modal-progress-total {
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+
+  .modal-progress {
+    margin-top: 0;
+    padding: 0 0 20px;
+  }
+
+}
+/* =========================================================
+   V14 — TYPOGRAPHY & SPACING
+   ========================================================= */
+
+/* ---------- GLOBAL TYPE ---------- */
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+
+/* ---------- EDITORIAL HEADINGS ---------- */
+
+.hero h1,
+.manifesto h2,
+.philosophy h2,
+.standard h2,
+.works h2,
+.atelier h2,
+.contact h2 {
+  letter-spacing: -.025em;
+}
+
+
+/* ---------- EYEBROWS ---------- */
+
+.eyebrow,
+.section-label,
+.project-meta,
+.modal-top,
+.modal-study-heading {
+  letter-spacing: .18em;
+}
+
+
+/* ---------- BODY COPY ---------- */
+
+.manifesto p,
+.philosophy p,
+.standard p,
+.atelier p,
+.contact p {
+  line-height: 1.8;
+}
+
+
+/* ---------- PROJECT TITLES ---------- */
+
+.project-copy h3 {
+  letter-spacing: -.035em;
+  line-height: .9;
+}
+
+
+/* ---------- PROJECT DESCRIPTION ---------- */
+
+.project-copy p {
+  line-height: 1.75;
+  max-width: 390px;
+}
+
+
+/* ---------- NUMBERS ---------- */
+
+.project-meta {
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ---------- MODAL TITLE ---------- */
+
+.modal-title-wrap h2 {
+  letter-spacing: -.045em;
+}
+
+
+/* ---------- MODAL DESCRIPTION ---------- */
+
+.modal-description p {
+  line-height: 1.85;
+  letter-spacing: .005em;
+}
+
+
+/* ---------- SPATIAL IDEA ---------- */
+
+.modal-study-idea {
+  line-height: 1.8;
+  letter-spacing: .003em;
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+.modal-navigation {
+  letter-spacing: .16em;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .hero h1,
+  .manifesto h2,
+  .philosophy h2,
+  .standard h2,
+  .works h2,
+  .atelier h2,
+  .contact h2 {
+    letter-spacing: -.02em;
+  }
+
+  .project-copy h3 {
+    letter-spacing: -.025em;
+  }
+
+  .modal-title-wrap h2 {
+    letter-spacing: -.035em;
+  }
+
+}
+/* =========================================================
+   V15 — MOBILE EXPERIENCE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  /* ---------- GLOBAL ---------- */
+
+  body {
+    overflow-x: hidden;
+  }
+
+  section {
+    overflow: hidden;
+  }
+
+
+  /* ---------- HEADER ---------- */
+
+  header {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  .edition {
+    display: none;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero h1 {
+    max-width: 92vw;
+  }
+
+
+  /* ---------- MANIFESTO ---------- */
+
+  .manifesto p,
+  .philosophy p,
+  .standard p,
+  .atelier p,
+  .contact p {
+    max-width: 88vw;
+  }
+
+
+  /* ---------- PROJECTS ---------- */
+
+  .project {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  .project-image {
+    width: 100%;
+  }
+
+  .project-copy p {
+    max-width: 88vw;
+  }
+
+
+  /* ---------- PROJECT META ---------- */
+
+  .project-meta {
+    gap: 8px;
+  }
+
+
+  /* ---------- PROJECT MODAL ---------- */
+
+  .project-modal {
+    width: 100%;
+    height: 100%;
+  }
+
+  .project-modal-image {
+    width: 100%;
+  }
+
+  .project-modal-content {
+    width: 100%;
+  }
+
+
+  /* ---------- MODAL TITLE ---------- */
+
+  .modal-title-wrap h2 {
+    max-width: 92vw;
+  }
+
+
+  /* ---------- MODAL DESCRIPTION ---------- */
+
+  .modal-description p {
+    max-width: 88vw;
+  }
+
+
+  /* ---------- MATERIALS ---------- */
+
+  #modalMaterials {
+    gap: 6px;
+  }
+
+  #modalMaterials i {
+    padding: 8px 10px;
+  }
+
+
+  /* ---------- SPATIAL STUDY ---------- */
+
+  .modal-study-line {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .modal-diagram {
+    min-width: 620px;
+  }
+
+
+  /* ---------- NAVIGATION ---------- */
+
+  .modal-navigation {
+    gap: 12px;
+  }
+
+  .modal-nav {
+    font-size: 7px;
+  }
+
+
+  /* ---------- TOUCH ---------- */
+
+  .project:hover .project-image img {
+    transform: none;
+  }
+
+  .project:hover .project-meta span:first-child {
+    letter-spacing: .18em;
+  }
+
+}
+/* =========================================================
+   V16 — VELAIRE BRAND SYSTEM
+   ========================================================= */
+
+/* ---------- BRAND SIGNATURE ---------- */
+
+.brand,
+.loader-logo,
+.footer-brand {
+  color: var(--ivory);
+}
+
+
+/* ---------- MONOGRAM SYSTEM ---------- */
+
+.brand-mark svg,
+.loader-logo svg {
+  shape-rendering: geometricPrecision;
+}
+
+.brand-mark path,
+.loader-logo path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+
+/* ---------- LOADER ---------- */
+
+.loader-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+
+  text-align: center;
+}
+
+.loader-logo svg {
+  width: 54px;
+  height: 54px;
+}
+
+.loader-logo .brand-name {
+  font-size: 17px;
+  letter-spacing: .32em;
+}
+
+
+/* ---------- BRAND HAIRLINE ---------- */
+
+.brand-line {
+  width: 1px;
+  height: 48px;
+
+  background: rgba(242,239,232,.28);
+
+  transform-origin: top;
+  transition:
+    transform 1s var(--ease),
+    opacity .5s ease;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 400;
+  letter-spacing: .16em;
+  line-height: 1;
+
+  transition:
+    letter-spacing .7s var(--ease);
+}
+
+.footer-brand:hover {
+  letter-spacing: .22em;
+}
+
+
+/* ---------- GLOBAL LABEL SYSTEM ---------- */
+
+.section-label,
+.eyebrow,
+.project-meta span,
+.modal-top span {
+  text-transform: uppercase;
+  font-family: var(--sans);
+  font-weight: 400;
+}
+
+
+/* ---------- CHAMPAGNE — SIGNATURE ONLY ---------- */
+
+.location-accent,
+.brand-accent {
+  color: var(--champagne);
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .loader-logo svg {
+    width: 46px;
+    height: 46px;
+  }
+
+  .loader-logo .brand-name {
+    font-size: 14px;
+    letter-spacing: .25em;
+  }
+
+  .footer-brand {
+    font-size: 30px;
+  }
+
+}
+/* =========================================================
+   V17 — INDIVIDUAL PROJECT EXPERIENCE
+   ========================================================= */
+
+.project-open {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  font-family: var(--sans);
+  font-size: 8px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+
+  color: var(--ivory);
+  background: none;
+  border: 0;
+  padding: 0;
+
+  cursor: pointer;
+}
+
+.project-open::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+
+  height: 1px;
+
+  background: currentColor;
+
+  transform: scaleX(.35);
+  transform-origin: left;
+
+  transition:
+    transform .7s var(--ease);
+}
+
+.project-open:hover::after {
+  transform: scaleX(1);
+}
+
+.project-open span {
+  display: inline-block;
+
+  transition:
+    transform .6s var(--ease);
+}
+
+.project-open:hover span {
+  transform: translateX(5px);
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .project-open {
+    font-size: 7px;
+    letter-spacing: .16em;
+  }
+
+}
+/* =========================================================
+   V17 — PROJECT CTA REFINEMENT
+   ========================================================= */
+
+[data-project-open] {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  font-family: var(--sans);
+  font-size: 8px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+
+  color: var(--ivory);
+  background: none;
+  border: 0;
+  padding: 0;
+
+  cursor: pointer;
+}
+
+[data-project-open]::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+
+  height: 1px;
+
+  background: currentColor;
+
+  transform: scaleX(.35);
+  transform-origin: left;
+
+  transition: transform .7s var(--ease);
+}
+
+[data-project-open]:hover::after {
+  transform: scaleX(1);
+}
+
+[data-project-open] span {
+  transition: transform .6s var(--ease);
+}
+
+[data-project-open]:hover span {
+  transform: translateX(5px);
+}
+
+@media (max-width: 800px) {
+
+  [data-project-open] {
+    font-size: 7px;
+    letter-spacing: .16em;
+  }
+
+}
+/* =========================================================
+   V17 — PROJECT NARRATIVE
+   ========================================================= */
+
+.modal-project-note {
+  margin-bottom: 30px;
+  padding-left: 18px;
+  border-left: 1px solid rgba(242,239,232,.28);
+}
+
+.modal-project-note span {
+  display: block;
+  margin-bottom: 10px;
+
+  font-family: var(--sans);
+  font-size: 7px;
+  letter-spacing: .18em;
+  opacity: .42;
+}
+
+.modal-project-note p {
+  max-width: 300px;
+  margin: 0;
+
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -.01em;
+  color: rgba(242,239,232,.82);
+}
+
+@media (max-width: 800px) {
+
+  .modal-project-note {
+    margin-bottom: 26px;
+    padding-left: 14px;
+  }
+
+  .modal-project-note p {
+    max-width: 88vw;
+    font-size: 14px;
+  }
+
+}
+/* =========================================================
+   V24 — SELECTED WORKS / EDITORIAL REFINEMENT
+   ========================================================= */
+
+/* IMAGENS — PRESENÇA ARQUITETÔNICA */
+
+.project-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--travertine);
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+
+  transform:
+    scale(1.035)
+    translate3d(
+      var(--parallax-x, 0px),
+      var(--parallax-y, 0px),
+      0
+    );
+
+  transition:
+    transform 1.4s var(--ease),
+    filter .8s ease;
+
+  will-change: transform;
+}
+
+.project-image:hover img {
+  transform:
+    scale(1.055)
+    translate3d(
+      var(--parallax-x, 0px),
+      var(--parallax-y, 0px),
+      0
+    );
+}
+
+
+/* OVERLAY DA IMAGEM */
+
+.project-image-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  padding: 28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 55%,
+      rgba(16,16,15,.46) 100%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity .7s var(--ease);
+}
+
+.project-image-overlay span {
+  font-family: var(--sans);
+  font-size: 7px;
+  line-height: 1;
+  letter-spacing: .20em;
+  color: var(--ivory);
+
+  transform: translateY(10px);
+
+  transition:
+    transform .6s var(--ease);
+}
+
+.project-image:hover .project-image-overlay {
+  opacity: 1;
+}
+
+.project-image:hover .project-image-overlay span {
+  transform: translateY(0);
+}
+
+
+/* META — EIXO EDITORIAL */
+
+.project-meta {
+  position: relative;
+}
+
+.project-meta::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+
+  width: 1px;
+
+  background: rgba(16,16,15,.14);
+}
+
+.project-meta span,
+.project-meta small {
+  transition:
+    opacity .4s ease;
+}
+
+
+/* TÍTULOS */
+
+.project h3 {
+  transition:
+    transform .7s var(--ease);
+}
+
+.project:hover h3 {
+  transform: translateX(4px);
+}
+
+
+/* LOCALIZAÇÃO */
+
+.project-location {
+  display: block;
+}
+
+
+/* TEXTO */
+
+.project p {
+  transition:
+    opacity .4s ease;
+}
+
+
+/* CTA */
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  color: inherit;
+  font-family: var(--sans);
+
+  cursor: pointer;
+}
+
+.project-link span {
+  position: relative;
+}
+
+.project-link span::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+
+  height: 1px;
+
+  background: currentColor;
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition:
+    transform .55s var(--ease);
+}
+
+.project-link i {
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1;
+
+  transition:
+    transform .5s var(--ease);
+}
+
+.project-link:hover span::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.project-link:hover i {
+  transform: translate(4px, -4px);
+}
+
+
+/* RITMO VERTICAL */
+
+.project + .project {
+  margin-top: 2vw;
+}
+
+
+/* =========================================================
+   MOBILE — EDITORIAL STACK
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .project {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 0;
+    margin-bottom: 90px;
+  }
+
+  .project-image,
+  .project-one .project-image,
+  .project-two .project-image,
+  .project-three .project-image,
+  .project-four .project-image,
+  .project-five .project-image {
+    grid-column: 1;
+    grid-row: 1;
+
+    min-height: 68vh;
+  }
+
+  .project-meta,
+  .project-one .project-meta,
+  .project-two .project-meta,
+  .project-three .project-meta,
+  .project-four .project-meta,
+  .project-five .project-meta {
+    grid-column: 1;
+    grid-row: 2;
+
+    align-self: start;
+
+    margin-top: 24px;
+    padding: 8px 0 8px 15px;
+  }
+
+  .project-copy,
+  .project-one .project-copy,
+  .project-two .project-copy,
+  .project-three .project-copy,
+  .project-four .project-copy,
+  .project-five .project-copy {
+    grid-column: 1;
+    grid-row: 3;
+
+    align-self: start;
+
+    max-width: 100%;
+
+    padding:
+      28px 0 0 !important;
+  }
+
+  .project h3 {
+    font-size: clamp(52px, 16vw, 88px);
+    line-height: .86;
+  }
+
+  .project p {
+    max-width: 330px;
+    margin-top: 28px;
+    font-size: 10px;
+    line-height: 1.8;
+  }
+
+  .project-link {
+    margin-top: 28px;
+  }
+
+  .project-image-overlay {
+    opacity: 1;
+    padding: 20px;
+  }
+
+  .project-image-overlay span {
+    transform: translateY(0);
+  }
+
+  .project-image img {
+    transform: scale(1.02);
+  }
+
+  .project-image:hover img {
+    transform: scale(1.02);
+  }
+
+  .project + .project {
+    margin-top: 0;
+  }
+
+}
+ /* V24.1 — REMOVE IMAGE CURSOR EFFECT */
+
+.project-image,
+.project-image * {
+  cursor: default !important;
+}
+
+.project-image::before,
+.project-image::after {
+  display: none !important;
+}
+/* =========================================================
+   V16 — VELAIRE BRAND SYSTEM
+   01 — MONOGRAM / WORDMARK / LOADER
+========================================================= */
+
+/* ---------- HEADER BRAND ---------- */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--ivory);
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  shape-rendering: geometricPrecision;
+}
+
+.brand-mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.brand-type {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-name {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: .28em;
+  line-height: 1;
+}
+
+.brand-tagline {
+  font-family: var(--sans);
+  font-size: 7px;
+  font-weight: 400;
+  letter-spacing: .22em;
+  line-height: 1;
+  opacity: .55;
+  white-space: nowrap;
+}
+
+
+/* ---------- BRAND MOTION ---------- */
+
+.brand-mark {
+  transition:
+    transform .7s var(--ease);
+}
+
+.brand:hover .brand-mark {
+  transform: rotate(90deg);
+}
+
+.brand-mark path {
+  transition:
+    stroke-width .4s ease,
+    opacity .4s ease;
+}
+
+.brand:hover .brand-mark path {
+  stroke-width: 2.6;
+}
+
+.brand-name {
+  transition:
+    letter-spacing .6s var(--ease),
+    opacity .4s ease;
+}
+
+.brand:hover .brand-name {
+  letter-spacing: .34em;
+}
+
+.brand-tagline {
+  transition:
+    opacity .5s ease,
+    letter-spacing .6s var(--ease);
+}
+
+.brand:hover .brand-tagline {
+  opacity: .75;
+  letter-spacing: .27em;
+}
+
+
+/* ---------- LOADER ---------- */
+
+.loader-inner {
+  text-align: center;
+}
+
+.loader-mark {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 25px;
+  shape-rendering: geometricPrecision;
+}
+
+.loader-mark path {
+  fill: none;
+  stroke: var(--ivory);
+  stroke-width: 1.15;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.loader-wordmark {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: .32em;
+  margin-left: .32em;
+  line-height: 1;
+}
+
+.loader-caption {
+  margin-top: 13px;
+  font-family: var(--sans);
+  font-size: 7px;
+  letter-spacing: .24em;
+  opacity: .5;
+}
+
+
+/* ---------- FOOTER BRAND ---------- */
+
+.footer-brand {
+  color: var(--ivory);
+}
+
+.footer-brand span {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+
+/* ---------- SIGNATURE LINE ---------- */
+
+.brand-line {
+  width: 1px;
+  height: 48px;
+  background: rgba(242,239,232,.28);
+  transform-origin: top;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand-name {
+    font-size: 15px;
+    letter-spacing: .22em;
+  }
+
+  .brand-tagline {
+    font-size: 6px;
+    letter-spacing: .16em;
+  }
+
+  .brand:hover .brand-mark {
+    transform: none;
+  }
+
+  .brand:hover .brand-name {
+    letter-spacing: .22em;
+  }
+
+  .brand:hover .brand-tagline {
+    letter-spacing: .16em;
+  }
+
+  .loader-mark {
+    width: 48px;
+    height: 48px;
+  }
+
+  .loader-wordmark {
+    font-size: 15px;
+    letter-spacing: .25em;
+    margin-left: .25em;
+  }
+
+  .loader-caption {
+    font-size: 6px;
+    letter-spacing: .18em;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .brand-mark,
+  .brand-mark path,
+  .brand-name,
+  .brand-tagline {
+    transition: none !important;
+  }
+
+  .brand:hover .brand-mark {
+    transform: none !important;
+  }
+
+}
+/* =========================================================
+   V16 — VELAIRE BRAND SYSTEM
+   02 — ARCHITECTURAL SIGNATURE
+========================================================= */
+
+/* ---------- PROJECT NUMBERS ---------- */
+
+.project-meta {
+  position: relative;
+  align-self: center;
+  padding: 12px 18px;
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  letter-spacing: .18em;
+}
+
+.project-meta::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(16,16,15,.18);
+  transform: scaleY(.72);
+  transform-origin: center;
+}
+
+.project-meta span {
+  display: block;
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+}
+
+.project-meta small {
+  display: block;
+  margin-top: 7px;
+  font-size: 7px;
+  font-weight: 300;
+  letter-spacing: .16em;
+  opacity: .48;
+}
+
+
+/* ---------- LOCATION SYSTEM ---------- */
+
+.project-location {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: .20em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.global-location {
+  position: relative;
+}
+
+.global-location strong {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+
+/* ---------- CHAMPAGNE MICRO-ACCENT ---------- */
+
+.location-accent,
+.brand-accent {
+  color: var(--champagne);
+}
+
+.project-location::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: currentColor;
+  opacity: .38;
+}
+
+
+/* ---------- SECTION CODE ---------- */
+
+.section-code {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+  opacity: .48;
+}
+
+
+/* ---------- VERTICAL ARCHITECTURAL RAIL ---------- */
+
+.philosophy::before,
+.standard::before,
+.atelier::before,
+.global::before,
+.services::before,
+.studies::before,
+.materials::before,
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4vw;
+  width: 1px;
+  background: rgba(16,16,15,.10);
+  transform: scaleY(.35);
+  transform-origin: top;
+  transition: transform 1.5s var(--ease);
+}
+
+
+/* ---------- DARK SECTION RAILS ---------- */
+
+.services::before,
+.studies::before {
+  background: rgba(242,239,232,.10);
+}
+
+
+/* ---------- WORKS RAIL ---------- */
+
+.works::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4vw;
+  width: 1px;
+  background: rgba(16,16,15,.08);
+  transform-origin: top;
+}
+
+
+/* ---------- MATERIAL INDEX ---------- */
+
+.material-button span:first-child {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 8px;
+  letter-spacing: .18em;
+  opacity: .52;
+}
+
+.material-button strong {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+.material-button small {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ---------- GLOBAL LOCATION INDEX ---------- */
+
+.global-location > span:first-child {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .18em;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .project-meta {
+    padding: 8px 0 8px 15px;
+  }
+
+  .project-meta::before {
+    left: 0;
+    transform: none;
+  }
+
+  .project-location::before {
+    width: 14px;
+    margin-right: 8px;
+  }
+
+  .works::before {
+    left: 6vw;
+  }
+
+  .philosophy::before,
+  .standard::before,
+  .atelier::before,
+  .global::before,
+  .services::before,
+  .studies::before,
+  .materials::before,
+  .contact::before {
+    left: 6vw;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .philosophy::before,
+  .standard::before,
+  .atelier::before,
+  .global::before,
+  .services::before,
+  .studies::before,
+  .materials::before,
+  .contact::before {
+    transform: none;
+  }
+
+}
+/* =========================================================
+   V16 — VELAIRE BRAND SYSTEM
+   03 — FINAL SIGNATURE
+========================================================= */
+
+/* ---------- BRAND HIERARCHY ---------- */
+
+.brand-name,
+.loader-wordmark {
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-tagline,
+.loader-caption {
+  text-transform: uppercase;
+}
+
+
+/* ---------- EDITION CODE ---------- */
+
+.edition {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: .20em;
+  opacity: .52;
+}
+
+.edition::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 1px;
+  margin-right: 9px;
+  vertical-align: middle;
+  background: currentColor;
+  opacity: .45;
+}
+
+
+/* ---------- HERO LOCATION SIGNATURE ---------- */
+
+.hero-locations {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+.hero-locations span {
+  letter-spacing: .18em;
+  transition:
+    opacity .35s ease,
+    letter-spacing .5s var(--ease);
+}
+
+.hero-locations span:hover {
+  opacity: 1;
+  letter-spacing: .22em;
+}
+
+
+/* ---------- FOOTER SIGNATURE ---------- */
+
+.footer-brand {
+  position: relative;
+}
+
+.footer-brand::after {
+  content: "ARCHITECTURE WITHOUT BORDERS.";
+  display: block;
+  margin-top: 9px;
+  font-family: var(--sans);
+  font-size: 6px;
+  font-weight: 400;
+  letter-spacing: .20em;
+  opacity: .38;
+}
+
+
+/* ---------- BRAND HAIRLINE ---------- */
+
+.brand-line {
+  transform: scaleY(.7);
+  opacity: .7;
+  transition:
+    transform 1s var(--ease),
+    opacity .5s ease;
+}
+
+.brand:hover + .brand-line {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+
+/* ---------- GLOBAL MICRO-TYPE ---------- */
+
+.section-label,
+.eyebrow,
+.project-meta,
+.modal-top,
+.modal-study-heading,
+.hero-index,
+.hero-kicker,
+.hero-coordinate,
+.hero-locations,
+.edition {
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+
+  .edition {
+    display: none;
+  }
+
+  .hero-locations span:hover {
+    letter-spacing: .18em;
+  }
+
+  .footer-brand::after {
+    font-size: 5px;
+    letter-spacing: .16em;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .brand-line,
+  .hero-locations span {
+    transition: none;
+  }
+
+}
+/* =========================================================
+   VELAIRE — MOBILE FINAL REFINEMENT
+   TYPOGRAPHY / SPACING / PROJECT MODAL
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  /* =======================================================
+     GLOBAL MOBILE TYPOGRAPHY
+     ======================================================= */
+
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  section {
+    overflow: hidden;
+  }
+
+  p {
+    overflow: visible;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+
+  /* =======================================================
+     HERO / LARGE STATEMENTS
+     ======================================================= */
+
+  .hero h1 {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    /*
+     * Menor que a versão anterior.
+     * Mantém o caráter editorial original.
+     */
+    font-size: 48px;
+    line-height: .94;
+    letter-spacing: -.025em;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     WE BELIEVE ARCHITECTURE SHOULD BE FELT.
+     ======================================================= */
+
+  .philosophy p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 34px;
+    line-height: 1.04;
+    letter-spacing: -.018em;
+
+    margin: 0;
+
+    overflow: visible;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+
+  /* =======================================================
+     ARCHITECTURE IS NOT SIMPLY...
+     ======================================================= */
+
+  .philosophy .body-copy,
+  .philosophy .description,
+  .philosophy .text,
+  .philosophy p + p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: 0;
+
+    overflow: visible;
+  }
+
+
+  /*
+   * Caso esse parágrafo esteja em outro container dentro
+   * da seção, preservamos a mesma escala.
+   */
+  .philosophy article p,
+  .philosophy .content p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: 0;
+  }
+
+
+  /* =======================================================
+     A VELAIRE SPACE IS NOT DEFINED BY EXCESS.
+     ======================================================= */
+
+  .standard p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 30px;
+    line-height: 1.08;
+    letter-spacing: -.015em;
+
+    overflow: visible;
+    word-break: normal;
+  }
+
+
+  /* =======================================================
+     STANDARD BODY COPY
+     ======================================================= */
+
+  .standard .body-copy,
+  .standard .description,
+  .standard .text,
+  .standard p + p,
+  .standard article p,
+  .standard .content p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: 0;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     01 — PROPORTION
+     02 — MATERIALITY
+     03 — LIGHT
+     04 — SILENCE
+     05 — TIME
+     ======================================================= */
+
+  .standard strong,
+  .standard b,
+  .standard h3,
+  .standard h4 {
+    font-family: var(--sans);
+    font-weight: 400;
+  }
+
+  .standard .principle,
+  .standard .principles,
+  .standard .standard-item,
+  .standard .standard-point {
+    max-width: 88vw;
+  }
+
+  .standard .principle p,
+  .standard .principles p,
+  .standard .standard-item p,
+  .standard .standard-point p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 0;
+  }
+
+
+  /* =======================================================
+     PRINCIPLE NUMBERS
+     ======================================================= */
+
+  .standard .number,
+  .standard .index,
+  .standard [class*="number"] {
+    font-family: var(--sans);
+    font-size: 7px;
+    font-weight: 400;
+    letter-spacing: .18em;
+  }
+
+
+  /* =======================================================
+     AN INTERNATIONAL ATELIER FOR ARCHITECTURE
+     ======================================================= */
+
+  .atelier p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    /*
+     * O tamanho é controlado para impedir que
+     * ARCHITECTURE seja cortado.
+     */
+    font-size: 32px;
+    line-height: 1.02;
+    letter-spacing: -.02em;
+
+    overflow: visible;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+
+  /* =======================================================
+     ATELIER BODY
+     ======================================================= */
+
+  .atelier .body-copy,
+  .atelier .description,
+  .atelier .text,
+  .atelier p + p,
+  .atelier article p,
+  .atelier .content p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: 0;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     VELAIRE APPROACHES EACH PROJECT...
+     ======================================================= */
+
+  .atelier .project-intro,
+  .atelier .project-description,
+  .atelier .atelier-copy {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: 0;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     FROM IDEA TO ATMOSPHERE
+     ======================================================= */
+
+  .contact p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 32px;
+    line-height: 1.03;
+    letter-spacing: -.02em;
+
+    overflow: visible;
+    word-break: normal;
+  }
+
+
+  /* =======================================================
+     GENERIC EDITORIAL BODY TEXT
+     ======================================================= */
+
+  .philosophy .body-copy,
+  .standard .body-copy,
+  .atelier .body-copy,
+  .contact .body-copy,
+  .philosophy .description,
+  .standard .description,
+  .atelier .description,
+  .contact .description {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0;
+  }
+
+
+  /* =======================================================
+     PROJECT IMAGES
+     Mantém exatamente a solução que funcionou.
+     ======================================================= */
+
+  .project {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex !important;
+    flex-direction: column;
+
+    padding-left: 6vw;
+    padding-right: 6vw;
+
+    margin-bottom: 90px;
+  }
+
+  .project-image,
+  .project-one .project-image,
+  .project-two .project-image,
+  .project-three .project-image,
+  .project-four .project-image,
+  .project-five .project-image {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 4 / 5;
+
+    min-height: 0;
+
+    overflow: hidden;
+
+    display: block;
+  }
+
+  .project-image img,
+  .project-one .project-image img,
+  .project-two .project-image img,
+  .project-three .project-image img,
+  .project-four .project-image img,
+  .project-five .project-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transform: scale(1.02) !important;
+  }
+
+  .project-image:hover img {
+    transform: scale(1.02) !important;
+  }
+
+
+  /* =======================================================
+     PROJECT META
+     ======================================================= */
+
+  .project-meta {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 22px;
+
+    padding: 8px 0 8px 15px;
+  }
+
+  .project-meta::before {
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    transform: none;
+  }
+
+
+  /* =======================================================
+     PROJECT TITLES
+     ======================================================= */
+
+  .project h3 {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 52px;
+    line-height: .88;
+    letter-spacing: -.025em;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     PROJECT DESCRIPTION
+     ======================================================= */
+
+  .project p {
+    max-width: 330px;
+
+    font-family: var(--sans);
+    font-weight: 400;
+
+    font-size: 10px;
+    line-height: 1.75;
+    letter-spacing: .01em;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     PROJECT CTA
+     ======================================================= */
+
+  .project-link,
+  .project-open,
+  [data-project-open] {
+    font-family: var(--sans);
+
+    font-size: 7px;
+    letter-spacing: .15em;
+  }
+
+
+  /* =======================================================
+     MODAL — MESMO TAMANHO PARA TODOS OS PROJETOS
+     ======================================================= */
+
+  .project-modal {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100svh;
+
+    max-width: 100%;
+    max-height: 100svh;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+
+  /*
+   * Regra importante:
+   * nenhum projeto pode definir uma altura diferente
+   * para a imagem do modal.
+   */
+  .project-modal-image,
+  .project-modal img {
+    width: 100%;
+
+    height: auto;
+
+    aspect-ratio: 4 / 3;
+
+    max-height: none;
+
+    object-fit: cover;
+
+    display: block;
+  }
+
+
+  /*
+   * Lake Residence deixa de ser maior que os outros.
+   * Se houver classe específica nele, estas regras
+   * normalizam o comportamento.
+   */
+  .project-modal.lake-residence .project-modal-image,
+  .project-modal[data-project="lake-residence"] .project-modal-image,
+  .project-modal[data-project="lake"] .project-modal-image,
+  #lakeResidenceModal .project-modal-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    max-height: none;
+    object-fit: cover;
+  }
+
+
+  /* =======================================================
+     MODAL CONTENT
+     ======================================================= */
+
+  .project-modal-content {
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    padding-left: 6vw;
+    padding-right: 6vw;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     MODAL TITLE
+     ======================================================= */
+
+  .modal-title-wrap {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .modal-title-wrap h2 {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 40px;
+    line-height: .92;
+    letter-spacing: -.025em;
+
+    overflow: visible;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+
+  /* =======================================================
+     MODAL DESCRIPTION
+     ======================================================= */
+
+  .modal-description p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 0;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     MODAL PROJECT NOTE
+     ======================================================= */
+
+  .modal-project-note {
+    max-width: 88vw;
+
+    padding-left: 14px;
+
+    overflow: visible;
+  }
+
+  .modal-project-note p {
+    max-width: 88vw;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+
+  /* =======================================================
+     MATERIALS
+     ======================================================= */
+
+  #modalMaterials {
+    max-width: 88vw;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+  }
+
+
+  /* =======================================================
+     DIAGRAM
+     ======================================================= */
+
+  .modal-study-line {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-diagram {
+    width: 620px;
+    min-width: 620px;
+    max-width: none;
+  }
+
+
+  /* =======================================================
+     FOOTER
+     ======================================================= */
+
+  .footer-brand {
+    font-family: var(--serif);
+    font-weight: 400;
+
+    font-size: 30px;
+    letter-spacing: .12em;
+
+    max-width: 88vw;
+  }
+
+
+  /* =======================================================
+     SMALL PHONES
+     ======================================================= */
+
+  @media (max-width: 380px) {
+
+    .hero h1 {
+      font-size: 44px;
+    }
+
+    .philosophy p {
+      font-size: 31px;
+    }
+
+    .standard p {
+      font-size: 28px;
+    }
+
+    .atelier p {
+      font-size: 30px;
+    }
+
+    .contact p {
+      font-size: 30px;
+    }
+
+    .project h3 {
+      font-size: 48px;
+    }
+
+    .modal-title-wrap h2 {
+      font-size: 37px;
+    }
+
+  }
+
+}
+/* =========================================================
+   VELAIRE — MOBILE TYPOGRAPHY FIX
+   APENAS: MANIFESTO + ATELIER
+   ========================================================= */
+
+@media screen and (max-width: 800px) {
+
+  /* -------------------------------------------------------
+     WE BELIEVE / ARCHITECTURE / SHOULD BE FELT.
+     ------------------------------------------------------- */
+
+  .philosophy p:first-of-type,
+  .philosophy .content > p:first-child,
+  .philosophy .body-copy:first-child {
+
+    display: block !important;
+
+    width: 82vw !important;
+    max-width: 82vw !important;
+    min-width: 0 !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-family: var(--serif) !important;
+    font-size: 29px !important;
+    font-weight: 400 !important;
+
+    line-height: 1.06 !important;
+    letter-spacing: -.012em !important;
+
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+
+  /* -------------------------------------------------------
+     AN INTERNATIONAL / ATELIER FOR / ARCHITECTURE
+     ------------------------------------------------------- */
+
+  .atelier p:first-of-type,
+  .atelier .content > p:first-child,
+  .atelier .body-copy:first-child {
+
+    display: block !important;
+
+    width: 82vw !important;
+    max-width: 82vw !important;
+    min-width: 0 !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-family: var(--serif) !important;
+    font-size: 28px !important;
+    font-weight: 400 !important;
+
+    line-height: 1.06 !important;
+    letter-spacing: -.012em !important;
+
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+
+  /* -------------------------------------------------------
+     REMOVE LIMITS S CONTAINERS DESTES DOIS TÍTULOS
+     ------------------------------------------------------- */
+
+  .philosophy p:first-of-type,
+  .atelier p:first-of-type {
+
+    transform: none !important;
+    scale: 1 !important;
+  }
+
+  .philosophy p:first-of-type *,
+  .atelier p:first-of-type * {
+
+    max-width: none !important;
+    width: auto !important;
+
+    white-space: normal !important;
+    overflow: visible !important;
+
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+
+  /* -------------------------------------------------------
+     SMALL MOBILES
+     ------------------------------------------------------ */
+
+  @media screen and (max-width: 380px) {
+
+    .philosophy p:first-of-type,
+    .philosophy .content > p:first-child,
+    .philosophy .body-copy:first-child {
+      width: 84vw !important;
+      max-width: 84vw !important;
+      font-size: 27px !important;
+    }
+
+    .atelier p:first-of-type,
+    .atelier .content > p:first-child,
+    .atelier .body-copy:first-child {
+      width: 84vw !important;
+      max-width: 84vw !important;
+      font-size: 26px !important;
+    }
+
+  }
+
+}
+/* =========================================================
+   VELAIRE — MOBILE TYPOGRAPHY UNIFICATION
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  /* =======================================================
+     GLOBAL EDITORIAL HEADINGS
+     ======================================================= */
+
+  .manifesto .manifesto-inner h2,
+  .atelier .atelier-inner h2,
+  .contact .contact-inner h2,
+  .standard .standard-intro h2,
+  .works .section-heading h2,
+  .philosophy .philosophy-heading h2,
+  .studies .studies-header h2,
+  .materials .materials-header h2,
+  .global .global-header h2,
+  .services .services-header h2 {
+
+    width: 100%;
+    max-width: 88vw;
+
+    margin: 0;
+
+    font-family: var(--serif);
+    font-weight: 400;
+
+    /*
+     * MESMO TAMANHO PARA TODOS
+     */
+    font-size: 38px;
+    line-height: .96;
+    letter-spacing: -.025em;
+
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     GARANTE QUE OS <br> DO HTML CONTINUEM FUNCIONANDO
+     ======================================================= */
+
+  .manifesto .manifesto-inner h2 br,
+  .atelier .atelier-inner h2 br,
+  .contact .contact-inner h2 br,
+  .standard .standard-intro h2 br,
+  .works .section-heading h2 br,
+  .philosophy .philosophy-heading h2 br,
+  .studies .studies-header h2 br,
+  .materials .materials-header h2 br,
+  .global .global-header h2 br,
+  .services .services-header h2 br {
+    display: block;
+  }
+
+
+  /* =======================================================
+     MANIFESTO
+     ======================================================= */
+
+  .manifesto .manifesto-inner {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     ATELIER
+     ======================================================= */
+
+  .atelier .atelier-inner {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     CONTACT
+     ======================================================= */
+
+  .contact .contact-inner {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+
+  /* =======================================================
+     DESERT HOUSE — FIX
+     ======================================================= */
+
+  .project-six {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex !important;
+    flex-direction: column;
+
+    padding-left: 6vw;
+    padding-right: 6vw;
+
+    margin-bottom: 90px;
+  }
+
+  .project-six .project-image {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 4 / 5;
+
+    min-height: 0;
+
+    overflow: hidden;
+
+    display: block;
+  }
+
+  .project-six .project-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transform: scale(1.02) !important;
+  }
+
+
+  /* =======================================================
+     SMALL PHONES
+     ======================================================= */
+
+  @media (max-width: 380px) {
+
+    .manifesto .manifesto-inner h2,
+    .atelier .atelier-inner h2,
+    .contact .contact-inner h2,
+    .standard .standard-intro h2,
+    .works .section-heading h2,
+    .philosophy .philosophy-heading h2,
+    .studies .studies-header h2,
+    .materials .materials-header h2,
+    .global .global-header h2,
+    .services .services-header h2 {
+
+      font-size: 34px;
+      line-height: .98;
+      letter-spacing: -.02em;
+    }
+
+  }
+
+}

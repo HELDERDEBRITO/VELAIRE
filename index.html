@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>VELAIRE — Architecture Without Borders</title>
+
+  <meta
+    name="description"
+    content="VELAIRE — An international architecture atelier focused on private residences, interiors and spatial experiences."
+  />
+
+  <meta name="theme-color" content="#10100f" />
+
+  <!-- FAVICON -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2310100F'/%3E%3Cpath d='M14 20 L50 80 L86 20 M31 20 L50 51 L69 20' fill='none' stroke='%23F2EFE8' stroke-width='4' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E"
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+
+<body>
+
+  <!-- =====================================================
+       LOADER
+  ====================================================== -->
+
+  <div class="loader" id="loader">
+
+    <div class="loader-inner">
+
+      <svg class="loader-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M12 18 L50 82 L88 18"></path>
+        <path d="M31 18 L50 50 L69 18"></path>
+      </svg>
+
+      <div class="loader-wordmark">
+        VELAIRE
+      </div>
+
+      <div class="loader-caption">
+        ARCHITECTURE WITHOUT BORDERS
+      </div>
+
+      <div class="loader-progress">
+        <span id="loaderProgress">00</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       CURSOR
+  ====================================================== -->
+
+  <div class="cursor" id="cursor">
+    <span></span>
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="site-header">
+
+    <a
+      href="#top"
+      class="brand magnetic"
+      aria-label="VELAIRE Home"
+    >
+
+      <span class="brand-mark" aria-hidden="true">
+
+        <svg viewBox="0 0 100 100">
+
+          <path d="M14 20 L50 80 L86 20"></path>
+
+          <path d="M31 20 L50 51 L69 20"></path>
+
+        </svg>
+
+      </span>
+
+
+      <span class="brand-type">
+
+        <span class="brand-name">
+          VELAIRE
+        </span>
+
+        <span class="brand-tagline">
+          ARCHITECTURE WITHOUT BORDERS.
+        </span>
+
+      </span>
+
+    </a>
+
+
+    <div class="header-right">
+
+      <span class="edition">
+        V / 07
+      </span>
+
+      <button
+        class="menu-toggle magnetic"
+        id="menuToggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+
+        <span></span>
+        <span></span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       FULLSCREEN MENU
+  ====================================================== -->
+
+  <div
+    class="fullscreen-menu"
+    id="fullscreenMenu"
+  >
+
+    <div class="menu-background"></div>
+
+
+    <div class="menu-top">
+
+      <span>
+        VELAIRE
+      </span>
+
+      <span>
+        INTERNATIONAL ARCHITECTURE ATELIER
+      </span>
+
+    </div>
+
+
+    <div class="menu-content">
+
+      <div class="menu-navigation">
+
+        <a
+          href="#work"
+          class="menu-link magnetic"
+        >
+          <span class="menu-number">01</span>
+          <span>WORK</span>
+        </a>
+
+
+        <a
+          href="#philosophy"
+          class="menu-link magnetic"
+        >
+          <span class="menu-number">02</span>
+          <span>PHILOSOPHY</span>
+        </a>
+
+
+        <a
+          href="#materials"
+          class="menu-link magnetic"
+        >
+          <span class="menu-number">03</span>
+          <span>MATERIALS</span>
+        </a>
+
+
+        <a
+          href="#atelier"
+          class="menu-link magnetic"
+        >
+          <span class="menu-number">04</span>
+          <span>ATELIER</span>
+        </a>
+
+
+        <a
+          href="#contact"
+          class="menu-link magnetic"
+        >
+          <span class="menu-number">05</span>
+          <span>CONTACT</span>
+        </a>
+
+      </div>
+
+
+      <div class="menu-project-preview">
+
+        <div
+          class="menu-preview-image"
+          id="menuPreviewImage"
+        ></div>
+
+        <div class="menu-preview-meta">
+
+          <span id="menuPreviewCode">
+            PROJECT NO. 01
+          </span>
+
+          <span id="menuPreviewLocation">
+            MONACO
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="menu-bottom">
+
+      <span>
+        MONACO · LAKE COMO · ST. MORITZ
+      </span>
+
+      <span>
+        MALIBU · DUBAI · ARIZONA
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <main id="top">
+
+
+    <!-- ===================================================
+         HERO
+    ==================================================== -->
+
+    <section
+      class="hero section-dark"
+      id="hero"
+    >
+
+      <div class="hero-grid-line hero-line-left"></div>
+
+      <div class="hero-grid-line hero-line-right"></div>
+
+
+      <div class="hero-image-wrap">
+
+        <img
+          src="images/hero.jpg"
+          alt="Contemporary architectural residence"
+          class="hero-image"
+        />
+
+        <div class="hero-image-overlay"></div>
+
+      </div>
+
+
+      <div class="hero-content">
+
+
+        <div class="hero-top">
+
+          <span class="hero-index">
+            01 / 07
+          </span>
+
+          <span class="hero-kicker">
+            ARCHITECTURE<br>
+            PRIVATE RESIDENCES<br>
+            SPATIAL EXPERIENCES
+          </span>
+
+        </div>
+
+
+        <div class="hero-title-wrap">
+
+          <div class="hero-eyebrow">
+            INTERNATIONAL ARCHITECTURE ATELIER
+          </div>
+
+          <h1 class="hero-title">
+
+            <span>ARCHITECTURE</span>
+
+            <span>WITHOUT</span>
+
+            <span>BORDERS.</span>
+
+          </h1>
+
+        </div>
+
+
+        <div class="hero-bottom">
+
+          <div class="hero-coordinate">
+
+            43°44'N<br>
+            7°25'E
+
+          </div>
+
+
+          <p class="hero-description">
+
+            Spaces shaped by form, matter and light.
+            Designed to outlive trends.
+
+          </p>
+
+
+          <div class="hero-locations">
+
+            <span>MONACO</span>
+            <span>LAKE COMO</span>
+            <span>ST. MORITZ</span>
+            <span>MALIBU</span>
+            <span>DUBAI</span>
+            <span>ARIZONA</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="scroll-indicator">
+
+        <span>
+          SCROLL
+        </span>
+
+        <i></i>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         MANIFESTO
+    ==================================================== -->
+
+    <section
+      class="manifesto section-ivory"
+      id="manifesto"
+    >
+
+      <div class="section-code">
+        V / 02
+      </div>
+
+
+      <div class="manifesto-inner reveal">
+
+        <p class="eyebrow">
+          THE VELAIRE MANIFESTO
+        </p>
+
+
+        <h2>
+
+          WE BELIEVE<br>
+          ARCHITECTURE<br>
+          SHOULD BE <em>FELT.</em>
+
+        </h2>
+
+
+        <div class="manifesto-footer">
+
+          <p>
+
+            Architecture is not simply the construction of space.
+            It is the atmosphere between walls, the movement of light,
+            the weight of materials and the silence between forms.
+
+          </p>
+
+
+          <span>
+            FORM / MATTER / LIGHT
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         SELECTED WORKS
+    ==================================================== -->
+
+    <section
+      class="works section-ivory"
+      id="work"
+    >
+
+      <div class="section-heading reveal">
+
+        <div>
+
+          <span class="eyebrow">
+            SELECTED WORKS
+          </span>
+
+          <h2>
+            PROJECTS<br>
+            <em>BEYOND PLACE.</em>
+          </h2>
+
+        </div>
+
+
+        <span class="section-code">
+          V / 03
+        </span>
+
+      </div>
+
+
+      <!-- PROJECT 01 — VILLA NOIR -->
+
+      <article
+        class="project project-one reveal"
+        data-project="0"
+        data-preview="images/villa-noir.jpg"
+      >
+
+        <div class="project-image">
+
+          <img
+            src="images/villa-noir.jpg"
+            alt="Contemporary Mediterranean residence"
+          />
+
+          <div class="project-image-overlay">
+
+            <span>
+              VIEW EXPERIENCE
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="project-meta">
+
+          <span>
+            PROJECT NO. 01
+          </span>
+
+          <span>
+            43°44'N / 7°25'E
+          </span>
+
+          <small>
+            CONCEPT PROJECT
+          </small>
+
+        </div>
+
+
+        <div class="project-copy">
+
+          <span class="project-location">
+            MONACO
+          </span>
+
+          <h3>
+            VILLA<br>
+            NOIR
+          </h3>
+
+          <p>
+
+            A sculptural Mediterranean residence defined by
+            limestone planes, deep shadows and uninterrupted
+            relationships between architecture and water.
+
+          </p>
+
+
+          <button
+            class="project-link magnetic"
+            data-project-open="0"
+          >
+
+            <span>
+              EXPLORE PROJECT
+            </span>
+
+            <i>
+              ↗
+            </i>
+
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 02 — LAKE RESIDENCE -->
+
+      <article
+        class="project project-two reveal"
+        data-project="1"
+        data-preview="images/lake-residence.jpg"
+      >
+
+        <div class="project-copy">
+
+          <span class="project-location">
+            LAKE COMO · ITALY
+          </span>
+
+          <h3>
+            LAKE<br>
+            RESIDENCE
+          </h3>
+
+          <p>
+
+            A quiet architectural composition where travertine,
+            glass and water establish a continuous dialogue
+            between interior and landscape.
+
+          </p>
+
+
+          <button
+            class="project-link magnetic"
+            data-project-open="1"
+          >
+
+            <span>
+              EXPLORE PROJECT
+            </span>
+
+            <i>
+              ↗
+            </i>
+
+          </button>
+
+        </div>
+
+
+        <div class="project-meta">
+
+          <span>
+            PROJECT NO. 02
+          </span>
+
+          <span>
+            45°59'N / 9°15'E
+          </span>
+
+          <small>
+            CONCEPT PROJECT
+          </small>
+
+        </div>
+
+
+        <div class="project-image">
+
+          <img
+            src="images/lake-residence.jpg"
+            alt="Contemporary residence overlooking Lake Como"
+          />
+
+          <div class="project-image-overlay">
+
+            <span>
+              VIEW EXPERIENCE
+            </span>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 03 — ALPINE RETREAT -->
+
+      <article
+        class="project project-three reveal"
+        data-project="2"
+        data-preview="images/alpine-retreat.jpg"
+      >
+
+        <div class="project-meta">
+
+          <span>
+            PROJECT NO. 03
+          </span>
+
+          <span>
+            46°29'N / 9°50'E
+          </span>
+
+          <small>
+            CONCEPT PROJECT
+          </small>
+
+        </div>
+
+
+        <div class="project-image">
+
+          <img
+            src="images/alpine-retreat.jpg"
+            alt="Contemporary alpine retreat"
+          />
+
+          <div class="project-image-overlay">
+
+            <span>
+              VIEW EXPERIENCE
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="project-copy">
+
+          <span class="project-location">
+            ST. MORITZ · SWITZERLAND
+          </span>
+
+          <h3>
+            ALPINE<br>
+            RETREAT
+          </h3>
+
+          <p>
+
+            A mountain residence conceived around warmth,
+            stone and controlled views of the alpine landscape.
+
+          </p>
+
+
+          <button
+            class="project-link magnetic"
+            data-project-open="2"
+          >
+
+            <span>
+              EXPLORE PROJECT
+            </span>
+
+            <i>
+              ↗
+            </i>
+
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 04 — PACIFIC HOUSE -->
+
+      <article
+        class="project project-four reveal"
+        data-project="3"
+        data-preview="images/pacific-house.jpg"
+      >
+
+        <div class="project-meta">
+
+          <span>
+            PROJECT NO. 04
+          </span>
+
+          <span>
+            34°01'N / 118°41'W
+          </span>
+
+          <small>
+            CONCEPT PROJECT
+          </small>
+
+        </div>
+
+
+        <div class="project-copy">
+
+          <span class="project-location">
+            MALIBU · CALIFORNIA
+          </span>
+
+          <h3>
+            PACIFIC<br>
+            HOUSE
+          </h3>
+
+          <p>
+
+            A horizontal composition dissolving the boundary
+            between concrete, glass and the Pacific horizon.
+
+          </p>
+
+
+          <button
+            class="project-link magnetic"
+            data-project-open="3"
+          >
+
+            <span>
+              EXPLORE PROJECT
+            </span>
+
+            <i>
+              ↗
+            </i>
+
+          </button>
+
+        </div>
+
+
+        <div class="project-image">
+
+          <img
+            src="images/pacific-house.jpg"
+            alt="Contemporary Malibu ocean residence"
+          />
+
+          <div class="project-image-overlay">
+
+            <span>
+              VIEW EXPERIENCE
+            </span>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- PROJECT 05 — PALM RESIDENCE -->
+
+      <article
+        class="project project-five reveal"
+        data-project="4"
+        data-preview="images/palm-residence.jpg"
+      >
+
+        <div class="project-image">
+
+          <img
+            src="images/palm-residence.jpg"
+            alt="Contemporary Dubai residence"
+          />
+
+          <div class="project-image-overlay">
+
+            <span>
+              VIEW EXPERIENCE
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="project-meta">
+
+          <span>
+            PROJECT NO. 05
+          </span>
+
+          <span>
+            25°12'N / 55°16'E
+          </span>
+
+          <small>
+            CONCEPT PROJECT
+          </small>
+
+        </div>
+
+
+        <div class="project-copy">
+
+          <span class="project-location">
+            DUBAI · UAE
+          </span>
+
+          <h3>
+            PALM<br>
+            RESIDENCE
+          </h3>
+
+          <p>
+
+            A refined residence shaped by limestone, 
+            water and deep architectural shadows, 
+            creating a measured dialogue between structure, light and horizon.
+
+          </p>
+
+
+          <button
+            class="project-link magnetic"
+            data-project-open="4"
+          >
+
+            <span>
+              EXPLORE PROJECT
+            </span>
+
+            <i>
+              ↗
+            </i>
+
+          </button>
+
+        </div>
+
+      </article>
+
+          <!-- PROJECT 06 — DESERT HOUSE -->
+
+    <article
+      class="project project-six reveal"
+      data-project="5"
+      data-preview="images/desert-house.jpg"
+    >
+
+      <div class="project-image">
+
+        <img
+          src="images/desert-house.jpg"
+          alt="Contemporary desert residence"
+        />
+
+        <div class="project-image-overlay">
+
+          <span>
+            VIEW EXPERIENCE
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-meta">
+
+        <span>
+          PROJECT NO. 06
+        </span>
+
+        <span>
+          34°02'N / 111°05'W
+        </span>
+
+        <small>
+          CONCEPT PROJECT
+        </small>
+
+      </div>
+
+
+      <div class="project-copy">
+
+        <span class="project-location">
+          ARIZONA · USA
+        </span>
+
+        <h3>
+          DESERT<br>
+          HOUSE
+        </h3>
+
+        <p>
+
+          A monolithic desert residence shaped by stone,
+          shadow and expansive relationships between
+          architecture, landscape and horizon.
+
+        </p>
+
+
+        <button
+          class="project-link magnetic"
+          data-project-open="5"
+        >
+
+          <span>
+            EXPLORE PROJECT
+          </span>
+
+          <i>
+            ↗
+          </i>
+
+        </button>
+
+      </div>
+
+    </article>
+
+
+      <div class="works-ending reveal">
+
+        <span>
+          06 / 06
+        </span>
+
+        <p>
+          ARCHITECTURE WITHOUT BORDERS
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PHILOSOPHY
+    ==================================================== -->
+
+    <section
+      class="philosophy section-dark"
+      id="philosophy"
+    >
+
+      <div class="section-code">
+        V / 04
+      </div>
+
+
+      <div class="philosophy-inner">
+
+        <div class="philosophy-heading reveal">
+
+          <span class="eyebrow">
+            OUR PHILOSOPHY
+          </span>
+
+          <h2>
+
+            FORM.<br>
+            MATTER.<br>
+            <em>LIGHT.</em>
+
+          </h2>
+
+        </div>
+
+
+        <div class="philosophy-copy reveal">
+
+          <p class="large-copy">
+
+            We design architecture through proportion,
+            materiality and atmosphere.
+
+          </p>
+
+          <p>
+
+            Every project begins with a question:
+            how should this space feel?
+
+          </p>
+
+          <p>
+
+            From that point, structure, light, landscape
+            and material become a single architectural language.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         VELAIRE STANDARD
+    ==================================================== -->
+
+    <section
+      class="standard section-ivory"
+      id="standard"
+    >
+
+      <div class="section-code">
+        V / 05
+      </div>
+
+
+      <div class="standard-inner">
+
+        <div class="standard-intro reveal">
+
+          <span class="eyebrow">
+            THE VELAIRE STANDARD
+          </span>
+
+          <h2>
+
+            LESS,<br>
+            BUT <em>BETTER.</em>
+
+          </h2>
+
+          <p>
+
+            A VELAIRE space is not defined by excess.
+            It is defined by what remains after everything
+            unnecessary has been removed.
+
+          </p>
+
+        </div>
+
+
+        <div class="standard-list">
+
+
+          <div class="standard-item reveal">
+
+            <span>01</span>
+
+            <div>
+
+              <h3>
+                PROPORTION
+              </h3>
+
+              <p>
+
+                Every dimension has a purpose.
+                Every relationship is deliberate.
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="standard-item reveal">
+
+            <span>02</span>
+
+            <div>
+
+              <h3>
+                MATERIALITY
+              </h3>
+
+              <p>
+
+                Materials are selected for their character,
+                aging and tactile presence.
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="standard-item reveal">
+
+            <span>03</span>
+
+            <div>
+
+              <h3>
+                LIGHT
+              </h3>
+
+              <p>
+
+                Natural light becomes part of the architecture,
+                not merely illumination.
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="standard-item reveal">
+
+            <span>04</span>
+
+            <div>
+
+              <h3>
+                SILENCE
+              </h3>
+
+              <p>
+
+                Spaces should create room for stillness,
+                contemplation and life.
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="standard-item reveal">
+
+            <span>05</span>
+
+            <div>
+
+              <h3>
+                TIME
+              </h3>
+
+              <p>
+
+                We design for permanence rather than
+                the temporary language of trends.
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         ARCHITECTURAL STUDIES
+    ==================================================== -->
+
+    <section class="studies section-dark">
+
+      <div class="section-code">
+        V / 06
+      </div>
+
+
+      <div class="studies-header reveal">
+
+        <span class="eyebrow">
+          ARCHITECTURAL STUDIES
+        </span>
+
+        <h2>
+
+          THE SPACE<br>
+          <em>BETWEEN.</em>
+
+        </h2>
+
+      </div>
+
+
+      <div class="study-grid">
+
+
+        <div class="study-card reveal">
+
+          <div class="study-number">
+            STUDY / 01
+          </div>
+
+
+          <svg
+            viewBox="0 0 500 500"
+            class="study-svg"
+          >
+
+            <rect
+              x="80"
+              y="80"
+              width="340"
+              height="340"
+            ></rect>
+
+            <rect
+              x="150"
+              y="150"
+              width="200"
+              height="200"
+            ></rect>
+
+            <line
+              x1="80"
+              y1="80"
+              x2="150"
+              y2="150"
+            ></line>
+
+            <line
+              x1="420"
+              y1="80"
+              x2="350"
+              y2="150"
+            ></line>
+
+            <line
+              x1="80"
+              y1="420"
+              x2="150"
+              y2="350"
+            ></line>
+
+            <line
+              x1="420"
+              y1="420"
+              x2="350"
+              y2="350"
+            ></line>
+
+          </svg>
+
+
+          <span>
+            PROPORTION
+          </span>
+
+        </div>
+
+
+        <div class="study-card reveal">
+
+          <div class="study-number">
+            STUDY / 02
+          </div>
+
+
+          <svg
+            viewBox="0 0 500 500"
+            class="study-svg"
+          >
+
+            <path d="M70 390 L250 90 L430 390"></path>
+
+            <path d="M135 390 L250 200 L365 390"></path>
+
+            <line
+              x1="70"
+              y1="390"
+              x2="430"
+              y2="390"
+            ></line>
+
+            <line
+              x1="250"
+              y1="90"
+              x2="250"
+              y2="390"
+            ></line>
+
+          </svg>
+
+
+          <span>
+            AXIS
+          </span>
+
+        </div>
+
+
+        <div class="study-card reveal">
+
+          <div class="study-number">
+            STUDY / 03
+          </div>
+
+
+          <svg
+            viewBox="0 0 500 500"
+            class="study-svg"
+          >
+
+            <circle
+              cx="250"
+              cy="250"
+              r="150"
+            ></circle>
+
+            <circle
+              cx="250"
+              cy="250"
+              r="90"
+            ></circle>
+
+            <line
+              x1="100"
+              y1="250"
+              x2="400"
+              y2="250"
+            ></line>
+
+            <line
+              x1="250"
+              y1="100"
+              x2="250"
+              y2="400"
+            ></line>
+
+          </svg>
+
+
+          <span>
+            BALANCE
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         MATERIALS
+    ==================================================== -->
+
+    <section
+      class="materials section-ivory"
+      id="materials"
+    >
+
+      <div class="section-code">
+        V / 07
+      </div>
+
+
+      <div class="materials-header reveal">
+
+        <div>
+
+          <span class="eyebrow">
+            MATERIAL STUDIES
+          </span>
+
+          <h2>
+
+            MATTER<br>
+            <em>WITH MEMORY.</em>
+
+          </h2>
+
+        </div>
+
+
+        <p>
+
+          Materials are not decoration.
+          They are architecture experienced through touch,
+          reflection, temperature and time.
+
+        </p>
+
+      </div>
+
+
+      <div class="materials-interface reveal">
+
+
+        <div class="material-list">
+
+
+          <button
+            class="material-button active"
+            data-material="stone"
+          >
+
+            <span>
+              01
+            </span>
+
+            <strong>
+              STONE
+            </strong>
+
+            <small>
+              WEIGHT / PERMANENCE
+            </small>
+
+          </button>
+
+
+          <button
+            class="material-button"
+            data-material="wood"
+          >
+
+            <span>
+              02
+            </span>
+
+            <strong>
+              WOOD
+            </strong>
+
+            <small>
+              WARMTH / GRAIN
+            </small>
+
+          </button>
+
+
+          <button
+            class="material-button"
+            data-material="concrete"
+          >
+
+            <span>
+              03
+            </span>
+
+            <strong>
+              CONCRETE
+            </strong>
+
+            <small>
+              STRUCTURE / SILENCE
+            </small>
+
+          </button>
+
+
+          <button
+            class="material-button"
+            data-material="glass"
+          >
+
+            <span>
+              04
+            </span>
+
+            <strong>
+              GLASS
+            </strong>
+
+            <small>
+              REFLECTION / TRANSPARENCY
+            </small>
+
+          </button>
+
+
+          <button
+            class="material-button"
+            data-material="water"
+          >
+
+            <span>
+              05
+            </span>
+
+            <strong>
+              WATER
+            </strong>
+
+            <small>
+              MOTION / HORIZON
+            </small>
+
+          </button>
+
+
+        </div>
+
+
+        <div class="material-preview">
+
+          <div class="material-texture stone active"></div>
+
+          <div class="material-texture wood"></div>
+
+          <div class="material-texture concrete"></div>
+
+          <div class="material-texture glass"></div>
+
+          <div class="material-texture water"></div>
+
+
+          <div class="material-preview-info">
+
+            <span id="materialTitle">
+              STONE
+            </span>
+
+            <span id="materialDescription">
+              Weight / Permanence
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         ATELIER
+    ==================================================== -->
+
+    <section
+      class="atelier section-dark"
+      id="atelier"
+    >
+
+      <div class="section-code">
+        V / 08
+      </div>
+
+
+      <div class="atelier-inner reveal">
+
+        <span class="eyebrow">
+          THE ATELIER
+        </span>
+
+
+        <h2>
+
+          AN INTERNATIONAL<br>
+          ATELIER FOR<br>
+          <em>ARCHITECTURE.</em>
+
+        </h2>
+
+
+        <div class="atelier-bottom">
+
+          <p>
+
+            VELAIRE approaches each project as a singular
+            architectural composition — from the first line
+            to the final material.
+
+          </p>
+
+
+          <span>
+            PRIVATE / SELECTIVE / GLOBAL
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+     GLOBAL PRESENCE
+    ==================================================== -->
+
+<section class="global section-ivory">
+
+  <div class="section-code">
+    V / 09
+  </div>
+
+
+  <div class="global-header reveal">
+
+    <span class="eyebrow">
+      GLOBAL PRESENCE
+    </span>
+
+    <h2>
+      ROOTED IN<br>
+      <em>PLACE.</em>
+    </h2>
+
+  </div>
+
+
+  <div class="global-grid">
+
+
+    <div class="global-location reveal">
+
+      <span>
+        01
+      </span>
+
+      <strong>
+        MONACO
+      </strong>
+
+      <small>
+        43°44'N / 7°25'E
+      </small>
+
+    </div>
+
+
+    <div class="global-location reveal">
+
+      <span>
+        02
+      </span>
+
+      <strong>
+        LAKE COMO
+      </strong>
+
+      <small>
+        45°59'N / 9°15'E
+      </small>
+
+    </div>
+
+
+    <div class="global-location reveal">
+
+      <span>
+        03
+      </span>
+
+      <strong>
+        ST. MORITZ
+      </strong>
+
+      <small>
+        46°29'N / 9°50'E
+      </small>
+
+    </div>
+
+
+    <div class="global-location reveal">
+
+      <span>
+        04
+      </span>
+
+      <strong>
+        MALIBU
+      </strong>
+
+      <small>
+        34°01'N / 118°41'W
+      </small>
+
+    </div>
+
+
+    <div class="global-location reveal">
+
+      <span>
+        05
+      </span>
+
+      <strong>
+        DUBAI
+      </strong>
+
+      <small>
+        25°12'N / 55°16'E
+      </small>
+
+    </div>
+
+
+    <div class="global-location reveal">
+
+      <span>
+        06
+      </span>
+
+      <strong>
+        ARIZONA
+      </strong>
+
+      <small>
+        34°02'N / 111°05'W
+      </small>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+    <!-- ===================================================
+         SERVICES
+    ==================================================== -->
+
+    <section class="services section-dark">
+
+      <div class="section-code">
+        V / 10
+      </div>
+
+
+      <div class="services-header reveal">
+
+        <span class="eyebrow">
+          CAPABILITIES
+        </span>
+
+        <h2>
+
+          FROM IDEA<br>
+          TO <em>ATMOSPHERE.</em>
+
+        </h2>
+
+      </div>
+
+
+      <div class="services-list">
+
+
+        <div class="service reveal">
+
+          <span>
+            01
+          </span>
+
+          <h3>
+            ARCHITECTURE
+          </h3>
+
+          <p>
+
+            Concept, architectural development,
+            spatial planning and design direction.
+
+          </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+          <span>
+            02
+          </span>
+
+          <h3>
+            INTERIORS
+          </h3>
+
+          <p>
+
+            Material palettes, furniture,
+            lighting and interior atmosphere.
+
+          </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+          <span>
+            03
+          </span>
+
+          <h3>
+            LANDSCAPE
+          </h3>
+
+          <p>
+
+            Landscape compositions designed
+            as extensions of architecture.
+
+          </p>
+
+        </div>
+
+
+        <div class="service reveal">
+
+          <span>
+            04
+          </span>
+
+          <h3>
+            PRIVATE RESIDENCES
+          </h3>
+
+          <p>
+
+            Highly considered residential environments
+            shaped around individual ways of living.
+
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CONTACT
+    ==================================================== -->
+
+    <section
+      class="contact section-ivory"
+      id="contact"
+    >
+
+      <div class="section-code">
+        V / 11
+      </div>
+
+
+      <div class="contact-inner reveal">
+
+        <span class="eyebrow">
+          PRIVATE INQUIRIES
+        </span>
+
+
+        <h2>
+
+          LET'S CREATE<br>
+          SOMETHING<br>
+          <em>TIMELESS.</em>
+
+        </h2>
+
+
+        <a
+          href="mailto:studio@velaire.com"
+          class="contact-link magnetic"
+        >
+
+          <span>
+            START A CONVERSATION
+          </span>
+
+          <i>
+            ↗
+          </i>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="footer section-dark">
+
+    <div class="footer-top">
+
+
+      <div class="footer-brand">
+
+        <svg
+          class="footer-mark"
+          viewBox="0 0 100 100"
+          aria-hidden="true"
+        >
+
+          <path d="M12 18 L50 82 L88 18"></path>
+
+          <path d="M31 18 L50 50 L69 18"></path>
+
+        </svg>
+
+
+        <span>
+          VELAIRE
+        </span>
+
+      </div>
+
+
+      <div class="footer-tagline">
+
+        ARCHITECTURE<br>
+        WITHOUT BORDERS.
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 VELAIRE
+      </span>
+
+      <span>
+        MONACO · LAKE COMO · ST. MORITZ · MALIBU · DUBAI · ARIZONA 
+      </span>
+
+      <span>
+        V / 07
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================================
+       PROJECT EXPERIENCE
+  ====================================================== -->
+
+  <div
+    class="project-modal"
+    id="projectModal"
+  >
+
+
+    <div class="project-modal-image">
+
+      <img
+        id="modalImage"
+        src=""
+        alt=""
+      />
+
+      <div class="modal-image-overlay"></div>
+
+    </div>
+
+
+    <div class="project-modal-content">
+
+
+      <!-- TOP -->
+
+      <div class="modal-top">
+
+        <div class="modal-project-info">
+
+          <span id="modalCode">
+            PROJECT NO. 01
+          </span>
+
+          <span id="modalType">
+            CONCEPT PROJECT
+          </span>
+
+        </div>
+
+
+        <button
+          class="modal-close magnetic"
+          id="modalClose"
+          aria-label="Close project"
+        >
+
+          <span></span>
+          <span></span>
+
+        </button>
+
+      </div>
+
+
+      <!-- PROJECT INFORMATION -->
+
+      <div class="modal-main">
+
+
+        <!-- LOCATION -->
+
+        <div class="modal-location">
+
+          <span id="modalCoordinates">
+            43°44'N / 7°25'E
+          </span>
+
+          <strong id="modalLocation">
+            MONACO
+          </strong>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <div class="modal-title-wrap">
+
+          <span class="eyebrow">
+            VELAIRE PROJECT EXPERIENCE
+          </span>
+
+          <h2 id="modalTitle">
+
+            VILLA<br>
+            NOIR
+
+          </h2>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="modal-description">
+
+          <p id="modalDescription">
+
+            A sculptural Mediterranean residence defined by
+            limestone planes, deep shadows and uninterrupted
+            relationships between architecture and water.
+
+          </p>
+
+
+          <div class="modal-project-note">
+
+            <span>
+              VELAIRE NOTE
+            </span>
+
+            <p id="modalProjectNote"></p>
+
+          </div>
+
+
+          <div class="modal-materials">
+
+            <span>
+              MATERIAL PALETTE
+            </span>
+
+
+            <div id="modalMaterials">
+
+              <i>
+                STONE
+              </i>
+
+              <i>
+                GLASS
+              </i>
+
+              <i>
+                WATER
+              </i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SPATIAL IDEA -->
+
+      <div class="modal-study">
+
+        <div class="modal-study-heading">
+
+          <span>
+            SPATIAL IDEA
+          </span>
+
+          <span id="modalStudyNumber">
+            01 / 06
+          </span>
+
+        </div>
+
+
+        <p
+          id="modalStudyIdea"
+          class="modal-study-idea"
+        ></p>
+
+
+        <div class="modal-study-line">
+
+          <svg
+            viewBox="0 0 800 160"
+            preserveAspectRatio="none"
+            class="modal-diagram"
+            aria-hidden="true"
+          >
+
+            <path d="M0 120 L180 120 L260 45 L440 45 L520 120 L800 120"></path>
+
+            <path d="M80 120 L180 80 L260 80"></path>
+
+            <path d="M520 80 L620 80 L720 120"></path>
+
+            <line
+              x1="0"
+              y1="140"
+              x2="800"
+              y2="140"
+            ></line>
+
+          </svg>
+
+        </div>
+
+      </div>
+
+
+      <!-- NAVIGATION -->
+
+      <div
+        class="modal-progress"
+        aria-hidden="true"
+      >
+
+        <span
+          class="modal-progress-current"
+          id="modalProgressCurrent"
+        >
+          01
+        </span>
+
+        <div class="modal-progress-line">
+
+          <span id="modalProgressBar"></span>
+
+        </div>
+
+        <span class="modal-progress-total">
+          06
+        </span>
+
+      </div>
+
+
+      <div class="modal-navigation">
+
+
+        <button
+          class="modal-nav previous magnetic"
+          id="previousProject"
+        >
+
+          <span>
+            ←
+          </span>
+
+          PREVIOUS
+
+        </button>
+
+
+        <span class="modal-nav-center">
+          ARCHITECTURE WITHOUT BORDERS
+        </span>
+
+
+        <button
+          class="modal-nav next magnetic"
+          id="nextProject"
+        >
+
+          NEXT
+
+          <span>
+            →
+          </span>
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       SCRIPT
+  ====================================================== -->
+
+  <script src="script.js"></script>
+
+</body>
+</html>
