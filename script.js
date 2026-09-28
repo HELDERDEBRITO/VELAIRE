@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "VILLA<br>NOIR",
       description:
         "A sculptural Mediterranean residence defined by limestone planes, deep shadows and uninterrupted relationships between architecture and water.",
-      image: "images/villa-noir.jpg",
+      image: "Images/villa-noir.jpg",
       materials: ["STONE", "GLASS", "WATER"],
       study: "01 / 06",
       spatialIdea:
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "LAKE<br>RESIDENCE",
       description:
         "A quiet architectural composition where travertine, glass and water establish a continuous dialogue between interior and landscape.",
-      image: "images/lake-residence.jpg",
+      image: "Images/lake-residence.jpg",
       materials: ["TRAVERTINE", "GLASS", "WATER"],
       study: "02 / 06",
       spatialIdea:
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "ALPINE<br>RETREAT",
       description:
         "A mountain residence conceived around warmth, stone and controlled views of the alpine landscape.",
-      image: "images/alpine-retreat.jpg",
+      image: "Images/alpine-retreat.jpg",
       materials: ["STONE", "WOOD", "GLASS"],
       study: "03 / 06",
       spatialIdea:
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "PACIFIC<br>HOUSE",
       description:
         "A horizontal composition dissolving the boundary between concrete, glass and the Pacific horizon.",
-      image: "images/pacific-house.jpg",
+      image: "Images/pacific-house.jpg",
       materials: ["CONCRETE", "GLASS", "WATER"],
       study: "04 / 06",
       spatialIdea:
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
   title: "PALM<br>RESIDENCE",
   description:
     "A refined residence shaped by limestone, water and deep architectural shadows, creating a measured dialogue between structure, light and horizon.",
-  image: "images/palm-residence.jpg",
+  image: "Images/palm-residence.jpg",
   materials: ["LIMESTONE", "GLASS", "WATER"],
   study: "05 / 06",
   spatialIdea:
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "DESERT<br>HOUSE",
       description:
         "A monolithic desert residence carved from stone, shadow and silence, where architecture extends into an uninterrupted relationship with landscape and horizon.",
-      image: "images/desert-house.jpg",
+      image: "Images/desert-house.jpg",
       materials: ["STONE", "CONCRETE", "GLASS"],
       study: "06 / 06",
       spatialIdea:
